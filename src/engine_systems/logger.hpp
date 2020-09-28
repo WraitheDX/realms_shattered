@@ -35,7 +35,7 @@ public:
 	/*
 		Logging call that allows us to write our message that will be recorded.
 	*/
-	std::ostringstream & log();
+	std::ostringstream &log();
 
 	/*
 		Should be called at application launch to ensure a fresh log file each run.

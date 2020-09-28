@@ -30,7 +30,7 @@ void Logger::create_new_log_file()
    FileIO::write_file( "    Shattered Realms Log\n===========================\n\n", m_log_file_name, true );
 }
 
-std::ostringstream & Logger::log()
+std::ostringstream &Logger::log()
 {
    // Obtain the current time
    std::time_t l_time( std::time( 0 ) );
