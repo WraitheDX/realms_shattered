@@ -15,7 +15,7 @@ const bool FileIO::write_file( const std::string &file_contents, const std::stri
    }
    
    // TODO (WraitheDX): Add generic call to abstracted platform-specific error checking for file_io calls
-   std::string file_path = get_working_directory() + "/" + file_name;
+   std::string file_path = working_directory_get() + "/" + file_name;
    std::ofstream file( file_path, file_write_flag );
    if( !file.is_open() ) {
       return false;
