@@ -3,7 +3,11 @@
 
 #include <ctime>
 
+#include "file_io.hpp"
+
 LoggerLevel Logger::m_logger_level = LoggerLevel::LOG_LEVEL_PROGRESS;
+
+std::string Logger::m_log_file_name = "log.txt";
 
 Logger::Logger( const LoggerLevel p_message_level ) :
    m_message_level( p_message_level )
@@ -17,9 +21,13 @@ Logger::~Logger()
    
    // Only report the message if it's log level is within the logger's log level
    if( m_message_level <= m_logger_level ) {
-      fprintf( stderr, "%s", m_message_stream.str().c_str() );
-      fflush( stderr );
+      FileIO::write_file( m_message_stream.str(), m_log_file_name, false );
    }
+}
+
+void Logger::create_new_log_file()
+{
+   FileIO::write_file( "    Shattered Realms Log\n===========================\n\n", m_log_file_name, true );
 }
 
 std::ostringstream & Logger::log()

@@ -1,6 +1,9 @@
 # Build Files
 /debug*
 
+# Debug Files
+log.txt
+
 # VS Files
 *.vcxproj*
 *.sln
