@@ -4,7 +4,7 @@
 
 ## Contribute
 
- Please see [CONTRIBUTING.md](https://github.com/WraitheDX/realms_shattered/blob/master/docs/contributing.md) for details.
+ Please see [CONTRIBUTING.md](https://github.com/WraitheDX/realms_shattered/blob/master/docs/contributing.md) for details, and check the [Issues](https://github.com/WraitheDX/realms_shattered/issues) page for what we are currently working on.
 
 ## External libraries
 
