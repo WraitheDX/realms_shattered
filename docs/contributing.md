@@ -2,7 +2,7 @@
 
 **Opening new issue?** Please read [issues.md](issues.md) first.
 
-We aim to keep contributing to Shattered Realms as simple as possible, but to achieve this does mean we all need to go the extra mile with consistent naming, commenting, and formatting.
+  We aim to keep contributing to Realms Shattered as simple as possible, but to achieve this does mean we all need to go the extra mile with consistent naming, commenting, and formatting.
 
 ## Managing branches
 
@@ -31,7 +31,7 @@ Clear naming conventions can greatly reduce the time it takes to decipher code, 
 2. Declare function and variable names entirely lowercase with underscores '_' between each word.
 3. Declare constants in all caps.
 4. Make names specific and avoid abbreviations, but also avoid absurdly long names.
-5. Order the wording from most refined to the broadest.
-			Ex: A creature will have two health variables: their current health, and their maximum health.
-					If we have it set up as current_health and max_health, typing in current or max could give us: current_health, current_mana, current_entities_in_map, current_time, current_temperature, etc...
-					Having them set up as health_current and health_max ensures that if we know we need something to do with health, typing in health should give us most possibilities.
+5. Order the wording from most refined to the broadest.  
+			Ex: A creature will have two health variables: their current health, and their maximum health.  
+					If we have it set up as current_health and max_health, typing in current or max could give us: current_health, current_mana, current_entities_in_map, current_time, current_temperature, etc...  
+					Having them set up as health_current and health_max ensures that if we know we need something to do with health, typing in health should give us most possibilities.  
