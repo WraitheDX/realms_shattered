@@ -1,2 +1,3 @@
 
 tag_command_quit: quit
+tag_command_help: help
