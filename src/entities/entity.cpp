@@ -18,7 +18,7 @@ const std::string &Entity::name_get()
    return m_name;
 }
 
-void std::string Entity::name_set( const std::string m_name )
+void Entity::name_set( const std::string name )
 {
    m_name = name;
 }

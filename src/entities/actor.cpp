@@ -1,8 +1,6 @@
 
 #include "actor.hpp"
 
-#include "entity.hpp"
-
 Actor::Actor( const int UNIQUE_ID, const std::string name, const int health ) :
    Entity( UNIQUE_ID, name ),
    m_is_alive( true ),
