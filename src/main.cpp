@@ -3,6 +3,7 @@
 #include <string>
 
 #include "engine_systems/console.hpp"
+#include "engine_systems/game_data.hpp"
 #include "engine_systems/language.hpp"
 #include "engine_systems/logger.hpp"
 
@@ -27,6 +28,8 @@ int main( char ** argument_strings, int argument_count )
    Language language;
    language.commands_load( "data/language/en_commands.txt" );
    language.text_load( "data/language/en_game_text.txt" );
+
+   GameData game_data;
 
    // The game is now initialized and ready to begin the gameplay loop.
    Logger( LoggerLevel::LOG_LEVEL_PROGRESS ).log() << "Realms Shattered is initialized";

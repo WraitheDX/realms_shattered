@@ -4,7 +4,7 @@
 
 #include <string>
 
-class Entity;
+#include "entity.hpp"
 
 class Actor : public Entity {
 public:
