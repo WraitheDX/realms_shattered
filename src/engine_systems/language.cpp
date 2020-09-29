@@ -18,28 +18,19 @@ const bool Language::commands_load( const std::string &file_name )
    const int FILE_CONTENTS_SIZE( file_contents.size() );
    for( int iterator = 0; iterator < FILE_CONTENTS_SIZE; ++iterator ) {
       std::string file_line_current( file_contents[ iterator ] );
+      std::string command_key( "" );
+      std::string command_value( "" );
+
       if( file_line_current.empty() ) {
          continue;
-      } else if( file_line_current.find( "tag_command_quit" ) != std::string::npos ) {
-         int string_found_position( file_line_current.find( ":" ) );
-         std::string command_value( file_line_current.substr( 0, string_found_position ) );
-         std::string command_key( file_line_current.substr( string_found_position, std::string::npos ) );
-
-         for( int command_key_iterator( 0 ); command_key_iterator < command_key.size(); ++command_key_iterator ) {
-            if( command_key[ command_key_iterator ] == ' '  || command_key[ command_key_iterator ] == ':' ) {
-               command_key.erase( command_key.begin() + command_key_iterator );
-               --command_key_iterator;
+      } else {
+         if( key_value_pair_get( file_line_current, command_key, command_value ) ) {
+            if( command_key == "tag_command_quit" ) {
+               commands_map[ command_value ] = CommandTag::COMMAND_QUIT;
+            } else if( command_key == "tag_command_help" ) {
+               commands_map[ command_value ] = CommandTag::COMMAND_HELP;
             }
          }
-
-         for( int command_value_iterator( 0 ); command_value_iterator < command_value.size(); ++command_value_iterator ) {
-            if( command_value[ command_value_iterator ] == ' '  || command_value[ command_value_iterator ] == ':' ) {
-               command_value.erase( command_value.begin() + command_value_iterator );
-               --command_value_iterator;
-            }
-         }
-
-         commands_map[ command_key ] = command_value;
       }
    }
 
@@ -49,20 +40,40 @@ const bool Language::commands_load( const std::string &file_name )
 const CommandTag Language::command_tag_get( const std::string &player_input )
 {
    std::string command_tag_string( "" );
-   std::map <std::string, std::string>::iterator commands_map_iter( commands_map.begin() );
-   std::map <std::string, std::string>::iterator commands_map_end( commands_map.end() );
+   std::map <std::string, CommandTag>::iterator commands_map_iter( commands_map.begin() );
+   std::map <std::string, CommandTag>::iterator commands_map_end( commands_map.end() );
    for( ; commands_map_iter != commands_map_end; ++commands_map_iter ) {
       if( commands_map_iter->first == player_input ) {
-         command_tag_string = commands_map_iter->second;
-         break;
+         return commands_map_iter->second;
       }
    }
 
-   if( commands_map_iter == commands_map_end ) {
-      return CommandTag::COMMAND_INVALID;
-   } else if( command_tag_string == "tag_command_quit" ) {
-      return CommandTag::COMMAND_QUIT;
+   return CommandTag::COMMAND_INVALID;
+}
+
+const bool Language::key_value_pair_get( const std::string &line, std::string &key, std::string &value )
+{
+   int string_found_position( line.find( ":" ) );
+   key = line.substr( 0, string_found_position );
+   value = line.substr( string_found_position, std::string::npos );
+
+   for( int key_iterator( 0 ); key_iterator < key.size(); ++key_iterator ) {
+      if( key[ key_iterator ] == ' ' || key[ key_iterator ] == ':' ) {
+         key.erase( key.begin() + key_iterator );
+         --key_iterator;
+      }
    }
 
-   return CommandTag::COMMAND_INVALID;
+   for( int value_iterator( 0 ); value_iterator < value.size(); ++value_iterator ) {
+      if( value[ value_iterator ] == ' ' || value[ value_iterator ] == ':' ) {
+         value.erase( value.begin() + value_iterator );
+         --value_iterator;
+      }
+   }
+
+   if( key.empty() || value.empty() ) {
+      return false;
+   }
+
+   return true;
 }

@@ -3,8 +3,8 @@
 #include <string>
 
 #include "engine_systems/console.hpp"
-#include "engine_systems/logger.hpp"
 #include "engine_systems/language.hpp"
+#include "engine_systems/logger.hpp"
 
 int main( char ** argument_strings, int argument_count )
 {
@@ -39,6 +39,9 @@ int main( char ** argument_strings, int argument_count )
       
       switch( language.command_tag_get( user_input ) ) {
          case CommandTag::COMMAND_INVALID:
+            break;
+         case CommandTag::COMMAND_HELP:
+            std::cout << "There should be a help listing here.\n";
             break;
          case CommandTag::COMMAND_QUIT:
             game_running = false;

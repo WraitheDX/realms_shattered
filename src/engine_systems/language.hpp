@@ -7,6 +7,8 @@
 
 enum class CommandTag {
    COMMAND_INVALID = 0,
+
+   COMMAND_HELP,
    COMMAND_QUIT
 };
 
@@ -25,7 +27,12 @@ public:
    const CommandTag command_tag_get( const std::string &player_input );
 
 private:
-   std::map <std::string, std::string> commands_map;
+   /*
+      Returns true and fills key/value with a tag and related value.
+   */
+   const bool key_value_pair_get( const std::string &line, std::string &key, std::string &value );
+
+   std::map <std::string, CommandTag> commands_map;
 };
 
 #endif // _LANGUAGE_HPP_
