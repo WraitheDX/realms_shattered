@@ -4,3 +4,4 @@ tag_help_command_hint:(Enter 'help' for a list of commands)
 tag_help_command_list:The following is a list of game commands:
 tag_help_command_list_note:(Note that not all commands will work in every context.)
 tag_help_command_list_quit:quit - quit the game
+tag_name_entry:Who's story is this?

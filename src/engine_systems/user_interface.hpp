@@ -13,22 +13,22 @@ public:
 
       NOTE: Does not receive input.
    */
-   void command_prompt_display( Console console, Language language );
+   void command_prompt_display( Console &console, Language &language );
 
    /*
       Displays the help list that gives the player a list of available game commands.
    */
-   void help_list_display( Console console, Language language );
+   void help_list_display( Console &console, Language &language );
 
    /*
       Pauses the game and displays the pause message at the bottom of the screen.
    */
-   void pause_and_display_message( Console console );
+   void pause_and_display_message( Console &console );
 
    /*
       Displays a brief view of the player's stats, generally the stats the player should see constantly (name, health, etc).
    */
-   void player_stats_brief_display( Console console, Language language, GameData &game_data );
+   void player_stats_brief_display( Console &console, Language &language, GameData &game_data );
 
 private:
    

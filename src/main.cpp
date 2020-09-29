@@ -6,6 +6,7 @@
 #include "engine_systems/game_data.hpp"
 #include "engine_systems/language.hpp"
 #include "engine_systems/logger.hpp"
+#include "engine_systems/user_input.hpp"
 #include "engine_systems/user_interface.hpp"
 
 int main( char ** argument_strings, int argument_count )
@@ -28,11 +29,14 @@ int main( char ** argument_strings, int argument_count )
    language.commands_load( "data/language/en_commands.txt" );
    language.text_load( "data/language/en_game_text.txt" );
 
+   UserInput user_input;
    UserInterface user_interface;
    GameData game_data;
 
    // The game is now initialized and ready to begin the gameplay loop.
    Logger( LoggerLevel::LOG_LEVEL_PROGRESS ).log() << "Realms Shattered is initialized";
+
+   user_input.player_name_get( console, language, game_data );
 
    bool game_running = true;
    while( game_running ) {
@@ -40,11 +44,9 @@ int main( char ** argument_strings, int argument_count )
 
       user_interface.player_stats_brief_display( console, language, game_data );
       user_interface.command_prompt_display( console, language );
-      std::string user_input( "" );
-      std::getline( std::cin, user_input );
-      std::cout << "\n";
+      CommandTag command_tag( user_input.player_command_get( language ) );
       
-      switch( language.command_tag_get( user_input ) ) {
+      switch( command_tag ) {
          case CommandTag::COMMAND_INVALID:
             break;
          case CommandTag::COMMAND_HELP:
