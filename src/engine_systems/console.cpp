@@ -14,7 +14,7 @@ void Console::buffer_dimensions_get( int &buffer_width, int &buffer_height )
    console_buffer_dimensions_get( buffer_width, buffer_height );
 }
 
-int buffer_height_get()
+int Console::buffer_height_get()
 {
    int buffer_width = 0;
    int buffer_height = 0;

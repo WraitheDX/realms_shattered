@@ -5,7 +5,7 @@
 
 #include "../entities/actor.hpp"
 
-void UserInterface::command_prompt_display( Console console, Language language )
+void UserInterface::command_prompt_display( Console &console, Language &language )
 {
    static const int COMMAND_TEXT_POSITION_Y = 20;
 
@@ -14,7 +14,7 @@ void UserInterface::command_prompt_display( Console console, Language language )
    std::cout << language.text_tag_get( "tag_command" ) << ": ";
 }
 
-void UserInterface::help_list_display( Console console, Language language )
+void UserInterface::help_list_display( Console &console, Language &language )
 {
    static const int HELP_TEXT_POSITION_Y = 5;
 
@@ -25,7 +25,7 @@ void UserInterface::help_list_display( Console console, Language language )
 }
 
 // TODO (WraitheDX): Need to pause using something like cin, and display a language-specific pause message."
-void UserInterface::pause_and_display_message( Console console )
+void UserInterface::pause_and_display_message( Console &console )
 {
    static const int PAUSE_TEXT_POSITION_Y = 22;
    console.cursor_position_set( 0, PAUSE_TEXT_POSITION_Y );
@@ -36,7 +36,7 @@ void UserInterface::pause_and_display_message( Console console )
    NOTE: Passing in GameData by value instead of reference will cause the retreived player pointer to lose its reference,
    which will cause the game to crash the next time the player's name is requested.
 */
-void UserInterface::player_stats_brief_display( Console console, Language language, GameData &game_data )
+void UserInterface::player_stats_brief_display( Console &console, Language &language, GameData &game_data )
 {
    static const int PLAYER_TEXT_POSITION_Y = 17;
 
