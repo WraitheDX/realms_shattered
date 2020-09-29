@@ -12,7 +12,12 @@ public:
    GameData();
    ~GameData();
 
+   /*
+      Deletes all entity pointers (except for Player *) and clears the entity list.
+   */
    void clear_entities();
+
+   Actor *player_get();
 
 private:
    std::vector <Entity *> m_entity_list;

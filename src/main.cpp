@@ -6,6 +6,7 @@
 #include "engine_systems/game_data.hpp"
 #include "engine_systems/language.hpp"
 #include "engine_systems/logger.hpp"
+#include "engine_systems/user_interface.hpp"
 
 int main( char ** argument_strings, int argument_count )
 {
@@ -23,12 +24,11 @@ int main( char ** argument_strings, int argument_count )
    int buffer_height = 0;
    console.buffer_dimensions_get( buffer_width, buffer_height );
 
-   int command_text_position_y = 20;
-
    Language language;
    language.commands_load( "data/language/en_commands.txt" );
    language.text_load( "data/language/en_game_text.txt" );
 
+   UserInterface user_interface;
    GameData game_data;
 
    // The game is now initialized and ready to begin the gameplay loop.
@@ -38,9 +38,8 @@ int main( char ** argument_strings, int argument_count )
    while( game_running ) {
       console.print( GAME_TITLE, ( ( buffer_width / 2 ) - ( GAME_TITLE.length() / 2 ) ), 1 );
 
-      console.cursor_position_set( 0, command_text_position_y );
-      std::cout << language.text_tag_get( "tag_help_command_hint" ) << "\n";
-      std::cout << language.text_tag_get( "tag_command" ) << ": ";
+      user_interface.player_stats_brief_display( console, language, game_data );
+      user_interface.command_prompt_display( console, language );
       std::string user_input( "" );
       std::getline( std::cin, user_input );
       std::cout << "\n";
@@ -49,18 +48,14 @@ int main( char ** argument_strings, int argument_count )
          case CommandTag::COMMAND_INVALID:
             break;
          case CommandTag::COMMAND_HELP:
-            console.cursor_position_set( 0, 10 );
-            std::cout << language.text_tag_get( "tag_help_command_list" ) << "\n";
-            std::cout << language.text_tag_get( "tag_help_command_list_note" ) << "\n\n";
-            std::cout << language.text_tag_get( "tag_help_command_list_quit" ) << "\n";
+            user_interface.help_list_display( console, language );
             break;
          case CommandTag::COMMAND_QUIT:
             game_running = false;
             break;
       }
       
-      console.cursor_position_set( 0, command_text_position_y + 2 );
-      console.pause();
+      user_interface.pause_and_display_message( console );
       console.clear();
    }
 

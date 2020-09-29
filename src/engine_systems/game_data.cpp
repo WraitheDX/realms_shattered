@@ -37,3 +37,8 @@ void GameData::clear_entities()
       m_entity_list.erase( entity_iter );
    }
 }
+
+Actor *GameData::player_get()
+{
+   return m_player;
+}
