@@ -2,8 +2,9 @@
 #include <iostream>
 #include <string>
 
-#include "engine_systems/logger.hpp"
 #include "engine_systems/console.hpp"
+#include "engine_systems/logger.hpp"
+#include "engine_systems/language.hpp"
 
 int main( char ** argument_strings, int argument_count )
 {
@@ -21,17 +22,32 @@ int main( char ** argument_strings, int argument_count )
    int buffer_height = 0;
    console.buffer_dimensions_get( buffer_width, buffer_height );
 
+   Language language;
+   language.commands_load( "data/language/en_commands.txt" );
+
    // The game is now initialized and ready to begin the gameplay loop.
    Logger( LoggerLevel::LOG_LEVEL_PROGRESS ).log() << "Realms Shattered is initialized";
 
-   console.print( GAME_TITLE, ( ( buffer_width / 2 ) - ( GAME_TITLE.length() / 2 ) ), 1 );
-   console.cursor_position_set( 0, 20 );
-   std::cout << "Console dimensions are: " << buffer_width << "." << buffer_height << "\n\n";
+   bool game_running = true;
+   while( game_running ) {
+      console.print( GAME_TITLE, ( ( buffer_width / 2 ) - ( GAME_TITLE.length() / 2 ) ), 1 );
 
-   console.pause();
-   console.clear();
-   console.print( "Thank you for playing!\n\n", ( ( buffer_width / 2 ) - 10 ), 1 );
-   console.pause();
+      console.cursor_position_set( 0, 20 );
+      std::cout << "Command: ";
+      std::string user_input( "" );
+      std::getline( std::cin, user_input );
+      
+      switch( language.command_tag_get( user_input ) ) {
+         case CommandTag::COMMAND_INVALID:
+            break;
+         case CommandTag::COMMAND_QUIT:
+            game_running = false;
+            break;
+      }
+
+      console.pause();
+      console.clear();
+   }
 
    // The game has now left the gameplay loop and will shut down any systems that require being shut down.
    Logger( LoggerLevel::LOG_LEVEL_PROGRESS ).log() << "Realms Shattered is shutting down";
