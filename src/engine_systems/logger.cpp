@@ -21,13 +21,13 @@ Logger::~Logger()
    
    // Only report the message if it's log level is within the logger's log level
    if( m_message_level <= m_logger_level ) {
-      FileIO::write_file( m_message_stream.str(), m_log_file_name, false );
+      FileIO::file_write( m_message_stream.str(), m_log_file_name, false );
    }
 }
 
 void Logger::create_new_log_file()
 {
-   FileIO::write_file( "    Shattered Realms Log\n===========================\n\n", m_log_file_name, true );
+   FileIO::file_write( "    Shattered Realms Log\n===========================\n\n", m_log_file_name, true );
 }
 
 std::ostringstream &Logger::log()
