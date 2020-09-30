@@ -4,11 +4,6 @@
 #include <iostream>
 #include "../platform/platform.hpp"
 
-Console::Console( const std::string &console_title )
-{
-   console_title_set( console_title );
-}
-
 void Console::buffer_dimensions_get( int &buffer_width, int &buffer_height )
 {
    console_buffer_dimensions_get( buffer_width, buffer_height );

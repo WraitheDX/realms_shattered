@@ -5,6 +5,7 @@
 #include "../entities/entity.hpp"
 
 GameData::GameData() :
+   m_game_running( true ),
    m_entity_list(),
    m_player( nullptr )
 {
@@ -36,6 +37,16 @@ void GameData::clear_entities()
 
       m_entity_list.erase( entity_iter );
    }
+}
+
+const bool GameData::is_game_running()
+{
+   return m_game_running;
+}
+
+void GameData::game_terminate()
+{
+   m_game_running = false;
 }
 
 Actor *GameData::player_get()
