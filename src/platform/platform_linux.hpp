@@ -3,12 +3,11 @@
 #define _PLATFORM_LINUX_HPP_
 
 #include <string>
-#include <stdio.h>
 #include <unistd.h>
-#include <sys/ioctl.h>
-#include <linux/limits.h>
 
 #ifdef __linux__
+#include <sys/ioctl.h>
+#include <linux/limits.h>
 
 /*
    Obtains the execution path of the game from C standard library functions

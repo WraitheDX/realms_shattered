@@ -4,7 +4,7 @@
 #include "game_state/game_state.hpp"
 #include "engine_systems/logger.hpp"
 
-int main( char ** argument_strings, int argument_count )
+int main(int argc, char **argv)
 {
    // Start the initialization of the game by setting up the Logger class to log game data and errors for us.
    Logger::set_logger_level( LoggerLevel::LOG_LEVEL_INFO );
