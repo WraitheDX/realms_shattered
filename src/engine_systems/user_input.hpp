@@ -19,9 +19,10 @@ public:
       Ask the player to enter the name of their character.
    */
    void player_name_get( Console &console, Language &language, GameData &game_data );
-
+   string player_language_get(Console &console, Language &language );
 private:
 
 };
 
 #endif _USER_INPUT_HPP_
+
