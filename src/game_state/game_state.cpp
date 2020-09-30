@@ -21,6 +21,7 @@ GameState::GameState( const std::string &game_title ) :
 
 const bool GameState::initialize()
 {
+   m_console.clear();
    m_console.title_set( m_game_title );
 
    ConfigFile config_file = FileIO::config_read();
