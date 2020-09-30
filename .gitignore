@@ -2,6 +2,7 @@
 /debug*
 
 # Debug Files
+config.txt
 log.txt
 
 # VS Files
