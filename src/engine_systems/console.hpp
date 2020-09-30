@@ -6,8 +6,6 @@
 
 class Console final {
 public:
-   Console( const std::string &console_title );
-
    /*
       Fills buffer_width/height with the number of character cells in width and height that make up the console buffer.
    */
