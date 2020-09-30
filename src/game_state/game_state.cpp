@@ -44,6 +44,9 @@ void GameState::run()
          case GameStateEnum::GAME_STATE_LOAD:
             game_state_load();
             break;
+         case GameStateEnum::GAME_STATE_MAIN_MENU:
+            game_state_main_menu();
+            break;
          case GameStateEnum::GAME_STATE_PLAYER_HUB:
             game_state_player_hub();
             break;

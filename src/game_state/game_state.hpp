@@ -14,6 +14,7 @@ enum class GameStateEnum {
    GAME_STATE_DEV_MENU,
    GAME_STATE_HELP,
    GAME_STATE_LOAD,
+   GAME_STATE_MAIN_MENU,
    GAME_STATE_PLAYER_HUB
 };
 
@@ -39,6 +40,7 @@ private:
    void game_state_dev_menu();
    void game_state_help();
    void game_state_load();
+   void game_state_main_menu();
    void game_state_player_hub();
 };
 
