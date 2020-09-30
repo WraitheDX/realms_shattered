@@ -1,3 +1,9 @@
 
-tag_command_quit:quit
+tag_command_accept:accept
 tag_command_help:help
+tag_command_quit:quit
+
+tag_command_height:height
+tag_command_width:width
+tag_command_offset_x:xoffset
+tag_command_offset_y:yoffset
