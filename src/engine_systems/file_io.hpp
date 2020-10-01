@@ -39,7 +39,7 @@ public:
    *  Write the configuration file out to the root game folder.
    */
    static void config_write( const ConfigFile &config_file );
-
+   
    /*
       Reads a file as a vector of strings, filling the 'file_contents' parameter with the contents of the file.
    */
@@ -54,6 +54,16 @@ public:
       Writes a vector of strings to the specified file name (obtains working directory internally), and requires truncation flag.
    */
    static const bool file_write( const std::vector <std::string> &file_contents, const std::string &file_name, const bool truncate_file );
+
+   /* 
+      Read all the files listed in the save directory
+   */
+   static const bool save_files_find(const std::vector<std::string> &dir_content);
+
+   /*
+      Read all the content of a file in the save directory based on the user choosen file name
+   */
+   static const bool load_save_file(const std::vector<std::strinf> &file_contents, const std::string &filename);
 };
 
 #endif // _FILE_IO_HPP_
