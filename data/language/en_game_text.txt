@@ -1,5 +1,15 @@
 
 tag_command:Command
+
+tag_console_dimensions_setup_title:Game Screen Setup
+tag_console_dimensions_setup_instructions:Please use the following commands to set the printable area of the game...
+tag_console_dimensions_setup_note:(NOTE: You may change these values later in the game file: config.txt)
+tag_console_dimensions_setup_width:width <number> - set width of the printable area to <number>
+tag_console_dimensions_setup_height:height <number> - set height of the printable area to <number>
+tag_console_dimensions_setup_xoffset:xoffset <number> - set number of cells from the left to <number>
+tag_console_dimensions_setup_yoffset:yoffset <number> - set number of cells from the top to <number>
+tag_console_dimensions_setup_accept:accept - save the current values and leave this page
+
 tag_help_command_hint:(Enter 'help' for a list of commands)
 tag_help_command_list:The following is a list of game commands:
 tag_help_command_list_note:(Note that not all commands will work in every context.)

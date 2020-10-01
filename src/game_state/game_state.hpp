@@ -22,8 +22,14 @@ class GameState final {
 public:
    GameState( const std::string &game_title );
 
+   /*
+   *  Initialize all of the game systems that are needed to run the game.
+   */
    const bool initialize();
 
+   /*
+   *  Continues to process the current game state until the game ends.
+   */
    void run();
 
 private:
@@ -37,11 +43,42 @@ private:
    UserInput m_user_input;
    UserInterface m_user_interface;
 
+   /*
+   *  The developer menu allows the player to use developer commands to do various things. Essentially a cheat menu used to assist in development.
+   */
    void game_state_dev_menu();
+
+   /*
+   *  A help menu that should display available commands and give general info on how to play the game.
+   */
    void game_state_help();
+
+   /*
+   *  Used to show the player a listing of all of the save files found, and allow the player to load one of them and continue their game.
+   */
    void game_state_load();
+
+   /*
+   *  Menu the game should load into after initialization. Basic options should include: New game, load game, help, settings, quit.
+   */
    void game_state_main_menu();
+
+   /*
+   *  The menu where that acts as the player's 'home'. Player is here between adventures, talking with npcs, etc.
+   */
    void game_state_player_hub();
+
+   /*
+   *  Asks the player to specify x/y offsets and width/height of the console area the game prints to.
+   * 
+   *  Game has a minimum width/height required to ensure proper alignment of things on the screen.
+   */
+   void print_dimensions_setup();
+
+   /*
+      Ask the player to enter the name of their character.
+   */
+   void player_name_get();
 };
 
 #endif // _GAME_STATE_HPP_

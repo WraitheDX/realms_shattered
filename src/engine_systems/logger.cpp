@@ -36,7 +36,12 @@ std::ostringstream &Logger::log()
    std::time_t l_time( std::time( 0 ) );
    // Convert the current time into something more easily handled
    std::tm l_current_time;
-   localtime_s( &l_current_time, &l_time );
+#ifdef _WIN32
+   localtime_s( &l_current_time, &l_time);
+#endif // _WIN32
+#ifdef __linux__
+   localtime_r( &l_time, &l_current_time);
+#endif //__linux__
 
    // Append the month, adding 0 if needed to keep uniform alignment
    if( ( l_current_time.tm_mon + 1 ) < 10 ) {
