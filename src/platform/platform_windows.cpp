@@ -110,7 +110,25 @@ const bool console_title_set_win32( const std::string &console_title )
 
 const bool get_file_list_win32( std::vector <std::string> &file_list, const std::string &file_path )
 {
-   return false;
+   WIN32_FIND_DATAA find_data;
+   HANDLE file_find( FindFirstFileA( file_path.c_str(), &find_data ) );
+   if( file_find == INVALID_HANDLE_VALUE ) 
+   {
+      Logger( LoggerLevel::LOG_LEVEL_ERROR ).log() << "get_file_list_win32() failed to find first file in: " << file_path;
+      return false;
+   } 
+   
+   // List all the files in the directory with some info about them.
+   do {
+      std::string file_name( find_data.cFileName );
+      if( file_name.size() > 3 && file_name.find( ".txt" ) ) {
+         file_list.push_back( find_data.cFileName );
+      }
+   } while( FindNextFileA( file_find, &find_data ) != 0 );
+
+   FindClose( file_find );
+
+   return true;
 }
 
 #endif // _WIN32
