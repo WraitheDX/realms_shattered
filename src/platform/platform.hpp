@@ -5,7 +5,7 @@
 #include <string>
 
 #include "platform_windows.hpp"
-
+#include "platform_linux.hpp"
 /*
 *  Returns the platform-specific call to get_working_directory.
 *

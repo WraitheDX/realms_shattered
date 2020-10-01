@@ -1,5 +1,6 @@
 # Build Files
 /debug*
+realms_shattered
 
 # Debug Files
 config.txt
