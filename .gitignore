@@ -3,6 +3,7 @@
 realms_shattered
 
 # Debug Files
+save/*
 config.txt
 log.txt
 

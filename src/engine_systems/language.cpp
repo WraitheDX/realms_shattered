@@ -32,8 +32,12 @@ const bool Language::commands_load( const std::string &file_name )
          if( key_value_pair_get( file_line_current, command_key, command_value ) ) {
             if( command_key == "tag_command_accept" ) {
                commands_map[ command_value ] = CommandTag::COMMAND_ACCEPT;
+            } else if( command_key == "tag_command_back" ) {
+               commands_map[ command_value ] = CommandTag::COMMAND_BACK;
             } else if( command_key == "tag_command_help" ) {
                commands_map[ command_value ] = CommandTag::COMMAND_HELP;
+            } else if( command_key == "tag_command_load" ) {
+               commands_map[ command_value ] = CommandTag::COMMAND_LOAD;
             } else if( command_key == "tag_command_move" ) {
                commands_map[ command_value ] = CommandTag::COMMAND_MOVE;
             } else if( command_key == "tag_command_quit" ) {

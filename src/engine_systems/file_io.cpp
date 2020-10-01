@@ -145,26 +145,9 @@ const bool FileIO::file_write( const std::vector <std::string> &file_contents, c
    return true;
 }
 
-const bool FileIO::save_files_find( const std::vector<std::string> & dir_content )
-{
-   /*
-   DIR * dir = opendir ("/save");
-   struct dirent *entry;
-   if (dir == NULL)
-      return false;
-   else   
-   {
-      std::string filename;
-      while( (entry = readdir(dir) ) != NULL){
-         filename = entry->d_name;
-         saved_files.push_back(filename.substr(0,filename.size()-4));
-      }
-   }
-
-   closedir(dir);
-   */
-
-   return true;
+const bool FileIO::player_files_find( std::vector<std::string> & dir_content )
+{   
+   return get_file_list( dir_content, working_directory_get() + "/save\\*" );
 }
 
 const bool FileIO::player_file_load( std::vector <std::string> &dir_content, const std::string &file_name )
@@ -177,8 +160,8 @@ const bool FileIO::player_file_load( std::vector <std::string> &dir_content, con
    } else {
       while( !file.eof() ) {
          std::string file_line( "" );
-         std::getline(file, file_line);
-         dir_content.push_back(file_line);
+         std::getline( file, file_line );
+         dir_content.push_back( file_line );
       }
    }
 

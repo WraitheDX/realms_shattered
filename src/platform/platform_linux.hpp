@@ -3,6 +3,7 @@
 #define _PLATFORM_LINUX_HPP_
 
 #include <string>
+#include <vector>
 
 #ifdef __linux__
 #include <unistd.h>
@@ -43,6 +44,11 @@ void console_pause_linux();
     TODO: Find a way to do this in Linux.
 */
 const bool console_title_set_linux( const std::string &console_title );
+
+/*
+*  Returns file_list populated with all files found in file_path.
+*/
+const bool get_file_list_linux( std::vector <std::string> &file_list, const std::string &file_path );
 
 #endif // _WIN32
 

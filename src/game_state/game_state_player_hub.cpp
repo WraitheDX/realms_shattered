@@ -20,6 +20,9 @@ void GameState::game_state_player_hub()
          m_game_data.rift_create();
          m_game_state_current = GameStateEnum::GAME_STATE_RIFT;
          break;
+      case CommandTag::COMMAND_LOAD:
+         m_game_state_current = GameStateEnum::GAME_STATE_LOAD;
+         break;
       case CommandTag::COMMAND_HELP:
          m_user_interface.help_list_display( m_console, m_language );
          break;

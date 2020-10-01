@@ -58,12 +58,12 @@ public:
    /* 
       Read all the files listed in the save directory
    */
-   static const bool save_files_find( const std::vector<std::string> &dir_content );
+   static const bool player_files_find( std::vector<std::string> &dir_content );
 
    /*
       Read all the content of a file in the save directory based on the user choosen file name
    */
-   static const bool player_file_load( std::vector <std::string> &file_contents, const std::string &filename );
+   static const bool player_file_load( std::vector <std::string> &file_contents, const std::string &file_name );
 };
 
 #endif // _FILE_IO_HPP_
