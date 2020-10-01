@@ -85,6 +85,9 @@ std::ostringstream &Logger::log()
       case LoggerLevel::LOG_LEVEL_PROGRESS:
          m_message_stream << "~PROGRESS: ";
          break;
+      case LoggerLevel::LOG_LEVEL_ACTION_LOG:
+         m_message_stream << "ACTIONLOG: ";
+         break;
       case LoggerLevel::LOG_LEVEL_INFO:
          m_message_stream << "--INFO---: ";
          break;
