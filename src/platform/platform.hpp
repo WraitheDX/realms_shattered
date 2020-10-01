@@ -3,6 +3,7 @@
 #define _PLATFORM_HPP_
 
 #include <string>
+#include <vector>
 
 #include "platform_windows.hpp"
 #include "platform_linux.hpp"
@@ -52,5 +53,10 @@ void console_pause();
 *  Returns the platform-specific call to set_console_title.
 */
 const bool console_title_set( const std::string &console_title );
+
+/*
+*  Returns the platform-specific call to get_file_list.
+*/
+const bool get_file_list( std::vector <std::string> &file_list, const std::string &file_path );
 
 #endif // _PLATFORM_HPP_

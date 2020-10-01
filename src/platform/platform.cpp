@@ -80,3 +80,12 @@ const bool console_title_set( const std::string &console_title )
 
    return false;
 }
+
+const bool get_file_list( std::vector <std::string> &file_list, const std::string &file_path )
+{
+   #ifdef _WIN32
+      return get_file_list_win32( file_list, file_path );
+   #endif // _WIN32
+
+   return false;
+}

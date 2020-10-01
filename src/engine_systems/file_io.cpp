@@ -144,35 +144,43 @@ const bool FileIO::file_write( const std::vector <std::string> &file_contents, c
 
    return true;
 }
-const bool FileIO::save_files_find(const std::vector<std::string> & dir_content){
-    DIR * dir = opendir ("/save");
+
+const bool FileIO::save_files_find( const std::vector<std::string> & dir_content )
+{
+   /*
+   DIR * dir = opendir ("/save");
    struct dirent *entry;
    if (dir == NULL)
       return false;
    else   
    {
-      string filename;
-      while((entry = readdir(dir)) != NULL){
+      std::string filename;
+      while( (entry = readdir(dir) ) != NULL){
          filename = entry->d_name;
          saved_files.push_back(filename.substr(0,filename.size()-4));
       }
    }
+
    closedir(dir);
+   */
+
    return true;
 }
-const bool FileIO::save_files_find(const std::vector<std::string> & dir_content, const std::string &filename){
-    string path = "/save/" + choosen_file;
-   ifstream file(path);
-   if (!file.open()){
+
+const bool FileIO::player_file_load( std::vector <std::string> &dir_content, const std::string &file_name )
+{
+   std::string file_path = working_directory_get() + "/save/" + file_name;
+   std::ifstream file( file_path );
+
+   if (!file.is_open()){
       return false;
-   }
-   else {
-      while(!file.eof()){
-         string file_line("");
-         getline(file, file_line);
-         file_content.push_back(file_line);
+   } else {
+      while( !file.eof() ) {
+         std::string file_line( "" );
+         std::getline(file, file_line);
+         dir_content.push_back(file_line);
       }
-      // now the file_content contains the file data 
    }
+
    return true;
 }
