@@ -20,8 +20,11 @@ public:
    */
    std::string player_string_get();
 
+   string player_language_get(Console &console, Language &language );
+
 private:
 
 };
 
 #endif _USER_INPUT_HPP_
+
