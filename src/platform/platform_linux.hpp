@@ -3,9 +3,9 @@
 #define _PLATFORM_LINUX_HPP_
 
 #include <string>
-#include <unistd.h>
 
 #ifdef __linux__
+#include <unistd.h>
 #include <sys/ioctl.h>
 #include <linux/limits.h>
 
