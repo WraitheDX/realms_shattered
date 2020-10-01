@@ -15,15 +15,15 @@ void GameState::game_state_load()
    found_save_folder = FileIO::save_files_find(saved_files);
    if (!found_save_folder)
       {
-         cout<<" No save files found\n";
+          console.print(" No save files found\n",2,2);
          return;
       }
   repeat:
-   cout<<"Your saved files are \t\t";
+   console.print("Your saved files are \t\t", 2, 2);
    for (auto i = saved_files.begin() ; i != saved_files.end(); i++){
       cout << i+1 << " - " << *i;
    }
-   cout << "Please type the exact name of the game you want to load \n";
+   console.print( "Please type the exact name of the game you want to load \n", 2, 2 );
    string choosen_file;
    getline(cin, choosen_file);
    // to read the file 
@@ -31,11 +31,11 @@ void GameState::game_state_load()
    vector<string> file_content;
    bool correct_name = FileIO::save_files_find(&file_content, &choosen_file);
    if (!correct_name)
-     { cout<<"Sorry, Could not find this file. \t\t press Y/y if you want to try again\n"
+     { console.print( "Sorry, Could not find this file. \t\t press Y/y if you want to try again\n", 2, 2 );
+
       cin >> done;
       if (done == 'y' || done == 'Y')
          goto repeat;
      }
-
-  // m_game_state_current = GameStateEnum::GAME_STATE_PLAYER_HUB;
+     
 }
