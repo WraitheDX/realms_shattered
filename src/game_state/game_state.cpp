@@ -12,6 +12,7 @@
 GameState::GameState( const std::string &game_title ) :
    m_game_state_current( GameStateEnum::GAME_STATE_PLAYER_HUB ),
    m_game_title( game_title ),
+   m_action_log(),
    m_console(),
    m_game_data(),
    m_language(),

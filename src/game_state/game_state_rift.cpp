@@ -2,6 +2,7 @@
 #include "game_state.hpp"
 
 #include "../engine_systems/logger.hpp"
+#include "../entities/actor.hpp"
 #include "../objects/rift.hpp"
 
 void GameState::game_state_rift()
@@ -19,6 +20,7 @@ void GameState::game_state_rift()
    m_console.print( name_room, ( ( m_console.width_get() / 2 ) - ( name_room.length() / 2 ) ), 2 );
 
    m_user_interface.player_stats_brief_display( m_console, m_language, m_game_data );
+   m_user_interface.action_log_display( m_action_log, m_console );
    m_user_interface.command_prompt_display( m_console, m_language );
    CommandTag command_tag( m_user_input.player_command_get( m_language ) );
       
@@ -31,10 +33,12 @@ void GameState::game_state_rift()
 
             if( rift->m_room_current >= rift->m_room_count ) {
                Logger( LoggerLevel::LOG_LEVEL_INFO ).log() << "Player has cleared the rift";
+               m_action_log.add_line( m_game_data.player_get()->name_get() + " has cleared the rift!" );
                m_game_data.rift_destroy();
                m_game_state_current = GameStateEnum::GAME_STATE_PLAYER_HUB;
             } else {
                Logger( LoggerLevel::LOG_LEVEL_INFO ).log() << "Player moved to room: " << rift->m_room_current + 1;
+               m_action_log.add_line( m_game_data.player_get()->name_get() + " has entered " + name_room );
             }
          }
          break;

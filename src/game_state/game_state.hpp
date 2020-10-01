@@ -4,6 +4,7 @@
 
 #include <string>
 
+#include "../engine_systems/action_log.hpp"
 #include "../engine_systems/console.hpp"
 #include "../engine_systems/game_data.hpp"
 #include "../engine_systems/language.hpp"
@@ -38,6 +39,7 @@ private:
 
    std::string m_game_title;
    
+   ActionLog m_action_log;
    Console m_console;
    GameData m_game_data;
    Language m_language;
