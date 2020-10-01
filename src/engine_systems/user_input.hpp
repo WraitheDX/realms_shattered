@@ -9,17 +9,19 @@
 class UserInput final {
 public:
    /*
-      Retrieves player input and returns the relevant CommandTag
-
-      TODO (WraitheDX): This needs to be expanded to allow for typing in multi-command strings.
+   *  Retrieves player input and returns the relevant CommandTag
+   *
+   *  TODO (WraitheDX): This needs to be expanded to allow for typing in multi-command strings.
    */
    const CommandTag player_command_get( Language &language );
 
    /*
-      Ask the player to enter the name of their character.
+   *  Retrieves a raw string from the player's input
    */
-   void player_name_get( Console &console, Language &language, GameData &game_data );
+   std::string player_string_get();
+
    string player_language_get(Console &console, Language &language );
+
 private:
 
 };

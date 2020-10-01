@@ -8,8 +8,14 @@
 enum class CommandTag {
    COMMAND_INVALID = 0,
 
+   COMMAND_ACCEPT,
    COMMAND_HELP,
-   COMMAND_QUIT
+   COMMAND_QUIT,
+
+   COMMAND_HEIGHT,
+   COMMAND_WIDTH,
+   COMMAND_OFFSET_X,
+   COMMAND_OFFSET_Y
 };
 
 class Language final {

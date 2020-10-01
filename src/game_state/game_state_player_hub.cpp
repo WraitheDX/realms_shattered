@@ -3,11 +3,8 @@
 
 void GameState::game_state_player_hub()
 {
-   int buffer_width = 0;
-   int buffer_height = 0;
-   m_console.buffer_dimensions_get( buffer_width, buffer_height );
-
-   m_console.print( m_game_title, ( ( buffer_width / 2 ) - ( m_game_title.length() / 2 ) ), 1 );
+   m_console.print_box( 0, 0, m_console.width_get(), m_console.height_get(), '+' );
+   m_console.print( m_game_title, ( ( m_console.width_get() / 2 ) - ( m_game_title.length() / 2 ) ), 1 );
 
    m_user_interface.player_stats_brief_display( m_console, m_language, m_game_data );
    m_user_interface.command_prompt_display( m_console, m_language );

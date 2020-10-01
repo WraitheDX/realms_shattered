@@ -30,10 +30,20 @@ const bool Language::commands_load( const std::string &file_name )
          continue;
       } else {
          if( key_value_pair_get( file_line_current, command_key, command_value ) ) {
-            if( command_key == "tag_command_quit" ) {
-               commands_map[ command_value ] = CommandTag::COMMAND_QUIT;
+            if( command_key == "tag_command_accept" ) {
+               commands_map[ command_value ] = CommandTag::COMMAND_ACCEPT;
             } else if( command_key == "tag_command_help" ) {
                commands_map[ command_value ] = CommandTag::COMMAND_HELP;
+            } else if( command_key == "tag_command_quit" ) {
+               commands_map[ command_value ] = CommandTag::COMMAND_QUIT;
+            } else if( command_key == "tag_command_height" ) {
+               commands_map[ command_value ] = CommandTag::COMMAND_HEIGHT;
+            } else if( command_key == "tag_command_width" ) {
+               commands_map[ command_value ] = CommandTag::COMMAND_WIDTH;
+            } else if( command_key == "tag_command_offset_x" ) {
+               commands_map[ command_value ] = CommandTag::COMMAND_OFFSET_X;
+            } else if( command_key == "tag_command_offset_y" ) {
+               commands_map[ command_value ] = CommandTag::COMMAND_OFFSET_Y;
             }
          }
       }
