@@ -3,6 +3,7 @@
 #define _PLATFORM_WINDOWS_HPP_
 
 #include <string>
+#include <vector>
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -44,6 +45,11 @@ void console_pause_win32();
    Sets the title of the console window from the Windows platform libraries.
 */
 const bool console_title_set_win32( const std::string &console_title );
+
+/*
+*  Returns file_list populated with all files found in file_path.
+*/
+const bool get_file_list_win32( std::vector <std::string> &file_list, const std::string &file_path );
 
 #endif // _WIN32
 

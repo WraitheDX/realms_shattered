@@ -108,4 +108,9 @@ const bool console_title_set_win32( const std::string &console_title )
    return true;
 }
 
+const bool get_file_list_win32( std::vector <std::string> &file_list, const std::string &file_path )
+{
+   return false;
+}
+
 #endif // _WIN32
