@@ -27,7 +27,7 @@ const bool GameState::initialize()
    ConfigFile config_file = FileIO::config_read();
 
    if( config_file.m_language == "INVALID" ) {
-      // TODO (WraitheDX): Need function to ask the player their preferred language
+      config_file.m_language = m_user_input.player_language_get( m_console, m_language );
 
       FileIO::config_write( config_file );
    }
@@ -65,30 +65,6 @@ const bool GameState::initialize()
    // The game is now initialized and ready to begin the gameplay loop.
    Logger( LoggerLevel::LOG_LEVEL_PROGRESS ).log() << "Realms Shattered is initialized";
    return true;
-}
-
-void GameState::player_name_get()
-{
-   Logger( LoggerLevel::LOG_LEVEL_PROGRESS ).log() << "Asking player for name";
-
-   static const int TEXT_ENTER_NAME_POSITION_Y( 1 );
-
-   while( true ) {
-      m_console.print( m_language.text_tag_get( "tag_name_entry"), 0, TEXT_ENTER_NAME_POSITION_Y );
-
-      m_console.print( " > ", 0, TEXT_ENTER_NAME_POSITION_Y + 1 );
-      std::string name( m_user_input.player_string_get() );
-
-      m_console.clear();
-
-      if( name.empty() ) {
-         continue;
-      }
-
-      m_game_data.player_get()->name_set( name );
-      Logger( LoggerLevel::LOG_LEVEL_INFO ).log() << "Player entered name: " << m_game_data.player_get()->name_get();
-      break;
-   }
 }
   
 void GameState::print_dimensions_setup()

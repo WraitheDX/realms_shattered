@@ -74,11 +74,6 @@ private:
    *  Game has a minimum width/height required to ensure proper alignment of things on the screen.
    */
    void print_dimensions_setup();
-
-   /*
-      Ask the player to enter the name of their character.
-   */
-   void player_name_get();
 };
 
 #endif // _GAME_STATE_HPP_

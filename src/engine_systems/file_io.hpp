@@ -7,7 +7,7 @@
 
 struct ConfigFile {
    ConfigFile():
-      m_language( "en" ),
+      m_language( "INVALID" ),
       m_game_width( 0 ),
       m_game_height( 0 ),
       m_game_offset_x( 0 ),
