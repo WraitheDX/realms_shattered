@@ -57,6 +57,14 @@ public:
    */
    void print_box( int position_x, int position_y, int width, int height, const char char_to_print );
 
+   /*
+   *  Print text formatted to stay withing the constraints of the specified dimensions.
+   * 
+   *  Returns the number of lines that were printed on, useful for relative positioning of further print calls.
+   *  All printing done is also constrained within the bounds of the 'game screen'.
+   */
+   int print_formatted( const std::string &text, int position_x, int position_y, int width, int height );
+
 private:
    int m_print_offset_x;
    int m_print_offset_y;
@@ -70,6 +78,13 @@ private:
    *  Fills buffer_width/height with the number of character cells in width and height that make up the console buffer.
    */
    void buffer_dimensions_get( int &buffer_width, int &buffer_height );
+
+   /*
+   *  Breaks 'text' into a smaller string (&broken_line) with maximum length of 'length_max'.
+   * 
+   *  Returns position of line break within 'text'.
+   */
+   int find_text_break_point( const std::string &text, std::string &broken_line, const int length_max );
    
    /*
    *  Set the height of the game's printable area within the console
@@ -90,6 +105,11 @@ private:
    *  Set the number of cells from the top of the console that the printable area will begin printing from.
    */
    void printable_offset_y_set( int offset_y );
+
+   /*
+   *  Deletes all blanks spaces ' ' at the front of 'text'.
+   */
+   void text_remove_preceding_spaces( std::string &text );
 
    /*
    *  Set the title of the console window's title bar.
