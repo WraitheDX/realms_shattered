@@ -14,7 +14,7 @@ const std::string working_directory_get_win32()
    {
       char buffer[FILENAME_MAX];
       // The Windows call: get(c)urrent(w)orking(d)irectory
-      _getcwd( buffer, FILENAME_MAX );
+      char *temp( _getcwd( buffer, FILENAME_MAX ) );
 
       working_directory = buffer;
    }

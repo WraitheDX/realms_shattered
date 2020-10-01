@@ -15,7 +15,8 @@ enum class GameStateEnum {
    GAME_STATE_HELP,
    GAME_STATE_LOAD,
    GAME_STATE_MAIN_MENU,
-   GAME_STATE_PLAYER_HUB
+   GAME_STATE_PLAYER_HUB,
+   GAME_STATE_RIFT
 };
 
 class GameState final {
@@ -67,6 +68,11 @@ private:
    *  The menu where that acts as the player's 'home'. Player is here between adventures, talking with npcs, etc.
    */
    void game_state_player_hub();
+
+   /*
+   *  Here the player will explore generated rifts composed of rooms.
+   */
+   void game_state_rift();
 
    /*
    *  Asks the player to specify x/y offsets and width/height of the console area the game prints to.

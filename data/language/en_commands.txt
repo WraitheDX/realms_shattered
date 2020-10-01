@@ -1,7 +1,9 @@
 
 tag_command_accept:accept
 tag_command_help:help
+tag_command_move:move
 tag_command_quit:quit
+tag_command_rift:rift
 
 tag_command_height:height
 tag_command_width:width

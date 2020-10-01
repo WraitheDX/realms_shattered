@@ -2,6 +2,8 @@
 #include "game_state.hpp"
 
 #include <iostream>
+#include <random>
+#include <time.h>
 
 #include "../engine_systems/file_io.hpp"
 #include "../engine_systems/logger.hpp"
@@ -21,6 +23,8 @@ GameState::GameState( const std::string &game_title ) :
 
 const bool GameState::initialize()
 {
+   srand( time( NULL ) );
+
    m_console.clear();
    m_console.title_set( m_game_title );
 
@@ -162,6 +166,9 @@ void GameState::run()
             break;
          case GameStateEnum::GAME_STATE_PLAYER_HUB:
             game_state_player_hub();
+            break;
+         case GameStateEnum::GAME_STATE_RIFT:
+            game_state_rift();
             break;
       }
    }
