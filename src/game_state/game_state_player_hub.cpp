@@ -1,6 +1,8 @@
 
 #include "game_state.hpp"
 
+#include "../engine_systems/logger.hpp"
+
 void GameState::game_state_player_hub()
 {
    m_console.print_box( 0, 0, m_console.width_get(), m_console.height_get(), '+' );
@@ -13,6 +15,11 @@ void GameState::game_state_player_hub()
    switch( command_tag ) {
       case CommandTag::COMMAND_INVALID:
          break;
+      case CommandTag::COMMAND_RIFT:
+         Logger( LoggerLevel::LOG_LEVEL_INFO ).log() << "Player entered a rift";
+         m_game_data.rift_create();
+         m_game_state_current = GameStateEnum::GAME_STATE_RIFT;
+         break;
       case CommandTag::COMMAND_HELP:
          m_user_interface.help_list_display( m_console, m_language );
          break;
@@ -21,6 +28,5 @@ void GameState::game_state_player_hub()
          break;
    }
       
-   m_user_interface.pause_and_display_message( m_console );
    m_console.clear();
 }
