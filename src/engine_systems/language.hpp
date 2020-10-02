@@ -9,6 +9,7 @@ enum class CommandTag {
    COMMAND_INVALID = 0,
 
    COMMAND_ACCEPT,
+   COMMAND_ATTACK,
    COMMAND_BACK,
    COMMAND_HELP,
    COMMAND_LOAD,

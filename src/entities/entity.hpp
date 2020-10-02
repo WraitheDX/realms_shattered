@@ -4,16 +4,31 @@
 
 #include <string>
 
+class GameData;
+
 class Entity {
 public:
-   Entity( const int UNIQUE_ID, const std::string name );
+   Entity( GameData *game_data, const std::string inherited_class, const int unique_id, const std::string name );
 
+   const std::string &inherited_class_get();
    const int unique_id_get();
+
    const std::string &name_get();
    void name_set( const std::string name );
 
+protected:
+   /*
+   *  Pointer reference to game data that owns all entities.
+   * 
+   *  Used to allow entities to interact with one another.
+   */
+   GameData *m_game_data;
+
 private:
-   const int M_UNIQUE_ID;
+   // This variable tells us what class to cast this entity to when we need to use it during runtime.
+   std::string m_inherited_class;
+
+   const int m_unique_id;
    std::string m_name;
 };
 
