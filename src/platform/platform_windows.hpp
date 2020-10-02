@@ -51,6 +51,16 @@ const bool console_title_set_win32( const std::string &console_title );
 */
 const bool get_file_list_win32( std::vector <std::string> &file_list, const std::string &file_path );
 
+/*
+*  Creates the fold specified.
+*/
+void folder_create_win32( const std::string &folder_path );
+
+/*
+*  Returns true if folder_path exists.
+*/
+const bool folder_exists_check_win32( const std::string &folder_path );
+
 #endif // _WIN32
 
 #endif // _PLATFORM_WINDOWS_HPP_

@@ -131,4 +131,20 @@ const bool get_file_list_win32( std::vector <std::string> &file_list, const std:
    return true;
 }
 
+void folder_create_win32( const std::string &folder_path )
+{
+   CreateDirectoryA( folder_path.c_str(), NULL );
+}
+
+const bool folder_exists_check_win32( const std::string &folder_path )
+{
+   DWORD file_attributes( GetFileAttributesA( folder_path.c_str() ) );
+   if( file_attributes != INVALID_FILE_ATTRIBUTES &&
+       ( file_attributes * FILE_ATTRIBUTE_DIRECTORY ) ) {
+      return true;
+   }
+
+   return false;
+}
+
 #endif // _WIN32

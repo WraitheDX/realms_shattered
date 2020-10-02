@@ -151,39 +151,61 @@ const bool FileIO::file_write( const std::vector <std::string> &file_contents, c
    return true;
 }
 
+void FileIO::folder_create( const std::string &folder_name )
+{
+   // If folder already exists, skip routine.
+   if( folder_exists( folder_name ) ) {
+      return;
+   }
+
+   folder_create_platform( working_directory_get() + "/" + folder_name );
+}
+
+const bool FileIO::folder_exists( const std::string &folder_name )
+{
+   return folder_exists_check( working_directory_get() + "/" + folder_name );
+}
+
 const bool FileIO::player_files_find( std::vector<std::string> & dir_content )
 {   
    return get_file_list( dir_content, working_directory_get() + "/save\\*" );
 }
 
-const bool FileIO::player_file_load( std::vector <std::string> &dir_content, const std::string &file_name )
+const bool FileIO::player_file_load( GameData &game_data, const std::string &file_name )
 {
-   std::string file_path = working_directory_get() + "/save/" + file_name;
-   std::ifstream file( file_path );
-
-   if (!file.is_open()){
+   std::map <std::string, std::string> file_contents;
+   if( !file_tags_parse( file_contents, "/save/" + file_name ) ) {
       return false;
-   } else {
-      while( !file.eof() ) {
-         std::string file_line( "" );
-         std::getline( file, file_line );
-         dir_content.push_back( file_line );
+   }
+   
+   std::map <std::string, std::string>::iterator file_contents_iterator( file_contents.begin() );
+   std::map <std::string, std::string>::iterator file_contents_end( file_contents.end() );
+   for( ; file_contents_iterator != file_contents_end; ++ file_contents_iterator ) {
+      if( file_contents_iterator->first == "name" ) {
+         game_data.player_get()->name_set( file_contents_iterator->second );
+      } else if( file_contents_iterator->first == "health_max" ) {
+         game_data.player_get()->health_max_set( atoi( file_contents_iterator->second.c_str() ) );
+      } else if( file_contents_iterator->first == "health_current" ) {
+         game_data.player_get()->health_max_set( atoi( file_contents_iterator->second.c_str() ) );
       }
    }
 
    return true;
 }
 
-const bool FileIO::player_file_save( GameData &game_data ) {
-   
-   // Check if save folder exists
+const bool FileIO::player_file_save( ActionLog &action_log, GameData &game_data ) {
+   // Create save folder if it does not exist
+   if( !folder_exists( "save" ) ) {
+      folder_create( "save" );
+   }
 
    std::vector <std::string> file_contents;
    file_contents.push_back( "name:" + game_data.player_get()->name_get() );
-   file_contents.push_back( "health_current:" + std::to_string( game_data.player_get()-> health_current_get() ) );
+   // Health max needs to come before health current, because health current is capped by health max.
    file_contents.push_back( "health_max:" + std::to_string ( game_data.player_get()->health_max_get() ) );
+   file_contents.push_back( "health_current:" + std::to_string( game_data.player_get()-> health_current_get() ) );
 
    file_write( file_contents, "save/" + game_data.player_get()->name_get() + ".txt", true );
-
+   action_log.add_line( "The game has been saved..." );
    return true;
 }

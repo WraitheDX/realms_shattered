@@ -59,4 +59,16 @@ const bool console_title_set( const std::string &console_title );
 */
 const bool get_file_list( std::vector <std::string> &file_list, const std::string &file_path );
 
+/*
+*  Returns the platform-specific call to folder_create.
+*/
+void folder_create_platform( const std::string &folder_path );
+
+/*
+*  Returns the platform-specific call to folder_exists.
+* 
+*  Returns true if folder_path exists.
+*/
+const bool folder_exists_check( const std::string &folder_path );
+
 #endif // _PLATFORM_HPP_

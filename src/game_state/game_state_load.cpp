@@ -34,8 +34,9 @@ void GameState::game_state_load()
          bool file_found( false );
          for( int iterator( 0 ); iterator < saved_files.size(); ++iterator ) {
             if( player_input + ".txt" == saved_files[ iterator ] ) {
-               if( FileIO::player_file_load( file_content, saved_files[ iterator ] ) ) {
+               if( FileIO::player_file_load( m_game_data, saved_files[ iterator ] ) ) {
                   file_found = true;
+                  break;
                } else {
                   Logger( LoggerLevel::LOG_LEVEL_ERROR ).log() << "Failed to load found player file: " << saved_files[ iterator ];
                }
@@ -45,8 +46,6 @@ void GameState::game_state_load()
          if( !file_found ) {
             m_console.print( "Sorry, could not read the file.", 2, 13 );
          } else {
-            // TODO (WraitheDX): Load player information here.
-
             m_game_state_current = GameStateEnum::GAME_STATE_PLAYER_HUB;
          }
 

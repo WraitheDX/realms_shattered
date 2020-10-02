@@ -1,6 +1,7 @@
 
 #include "game_state.hpp"
 
+#include "../engine_systems/file_io.hpp"
 #include "../engine_systems/logger.hpp"
 #include "../entities/actor.hpp"
 
@@ -25,6 +26,9 @@ void GameState::game_state_player_hub()
          break;
       case CommandTag::COMMAND_LOAD:
          m_game_state_current = GameStateEnum::GAME_STATE_LOAD;
+         break;
+      case CommandTag::COMMAND_SAVE:
+         FileIO::player_file_save( m_action_log, m_game_data );
          break;
       case CommandTag::COMMAND_HELP:
          m_user_interface.help_list_display( m_console, m_language );

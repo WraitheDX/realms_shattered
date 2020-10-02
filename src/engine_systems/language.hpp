@@ -5,23 +5,7 @@
 #include <map>
 #include <string>
 
-enum class CommandTag {
-   COMMAND_INVALID = 0,
-
-   COMMAND_ACCEPT,
-   COMMAND_ATTACK,
-   COMMAND_BACK,
-   COMMAND_HELP,
-   COMMAND_LOAD,
-   COMMAND_MOVE,
-   COMMAND_QUIT,
-   COMMAND_RIFT,
-
-   COMMAND_HEIGHT,
-   COMMAND_WIDTH,
-   COMMAND_OFFSET_X,
-   COMMAND_OFFSET_Y
-};
+#include "command_tag.hpp"
 
 class Language final {
 public:

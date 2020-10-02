@@ -7,6 +7,7 @@ tag_command_load:load
 tag_command_move:move
 tag_command_quit:quit
 tag_command_rift:rift
+tag_command_save:save
 
 tag_command_height:height
 tag_command_width:width
