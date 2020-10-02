@@ -4,6 +4,10 @@
 
 ## Contribute
 
+ All printing of text should be done from Console's various print functions.
+ All file reading/writing should be done from FileIO's functions.
+ All user input should be requested from UserInput's functions.
+
  Please see [CONTRIBUTING.md](https://github.com/WraitheDX/realms_shattered/blob/master/docs/contributing.md) for details, and check the [Issues](https://github.com/WraitheDX/realms_shattered/issues) page for what we are currently working on.
 
 ## External libraries
