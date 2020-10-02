@@ -3,6 +3,7 @@
 
 #include <fstream>
 
+#include "../entities/actor.hpp"
 #include "../platform/platform.hpp"
 
 // TODO (WraitheDX): Add generic call to abstracted platform-specific error checking for file_io calls
@@ -168,17 +169,16 @@ const bool FileIO::player_file_load( std::vector <std::string> &dir_content, con
    return true;
 }
 
-const bool FileIO::write_save_file(const std::vector<std::string> & file_contents, const std::string &filename){
-   std::ios_base::openmode file_write_flag = std::ios::trunc;
-   string path = "/save"+choosen_file+".txt";
-   ofstream file(path,file_write_flag);
+const bool FileIO::player_file_save( GameData &game_data, const std::string &file_name ) {
+   
+   // Check if save folder exists
 
-   const int FILE_CONTENTS_SIZE( file_contents.size() );
-   for( int file_contents_iterator( 0 ); file_contents_iterator < FILE_CONTENTS_SIZE; ++file_contents_iterator ) {
-      file << file_contents[ file_contents_iterator ] + "\n";
-   }
+   std::vector <std::string> file_contents;
+   file_contents.push_back( "name:" + game_data.player_get()->name_get() );
+   file_contents.push_back( "health_current:" + std::to_string( game_data.player_get()-> health_current_get() ) );
+   file_contents.push_back( "health_max:" + std::to_string ( game_data.player_get()->health_max_get() ) );
 
-   file.close();
+   file_write( file_contents, "save/" + file_name + ".txt", true );
 
    return true;
 }

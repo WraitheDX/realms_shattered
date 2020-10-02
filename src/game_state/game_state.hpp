@@ -82,10 +82,6 @@ private:
    *  Game has a minimum width/height required to ensure proper alignment of things on the screen.
    */
    void print_dimensions_setup();
-   /*
-      To save all persistent game data of the player's in a file with the character name in the save folder.
-   */
-   void game_state_save();
 };
 
 #endif // _GAME_STATE_HPP_
