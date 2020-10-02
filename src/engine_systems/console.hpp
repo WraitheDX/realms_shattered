@@ -117,6 +117,7 @@ private:
    void title_set( const std::string &console_title );
 
    friend class GameState;
+   friend class UserInput;
 };
 
 #endif _CONSOLE_HPP_

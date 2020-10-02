@@ -49,10 +49,10 @@ const bool GameState::initialize()
        config_file.m_game_width < m_console.m_print_width_min ||
        config_file.m_game_offset_x < 0 ||
        config_file.m_game_offset_y < 0 ) {
-      print_dimensions_setup();
+      m_user_input.print_dimensions_setup( m_console, m_language );
       
-      config_file.m_game_height = m_console.m_print_height;
-      config_file.m_game_width = m_console.m_print_width;
+      config_file.m_game_height = m_console.height_get();
+      config_file.m_game_width = m_console.width_get();
       config_file.m_game_offset_x = m_console.m_print_offset_x;
       config_file.m_game_offset_y = m_console.m_print_offset_y;
 
@@ -70,83 +70,6 @@ const bool GameState::initialize()
    // The game is now initialized and ready to begin the gameplay loop.
    Logger( LoggerLevel::LOG_LEVEL_PROGRESS ).log() << "Realms Shattered is initialized";
    return true;
-}
-  
-void GameState::print_dimensions_setup()
-{
-   int console_buffer_width( 0 );
-   int console_buffer_height( 0 );
-   m_console.buffer_dimensions_get( console_buffer_width, console_buffer_height );
-
-   bool dimensions_setup_running( true );
-   while( dimensions_setup_running ) {
-      int console_width = m_console.width_get();
-      int console_height = m_console.height_get();
-      m_console.print_box( 0, 0, console_width, console_height, '+' );
-
-      const std::string SETUP_TITLE( m_language.text_tag_get( "tag_console_dimensions_setup_title" ) );
-      m_console.print( SETUP_TITLE, ( ( console_width / 2 ) - ( SETUP_TITLE.length() / 2 ) ), 2 );
-      m_console.print( m_language.text_tag_get( "tag_console_dimensions_setup_instructions" ), 2, 4 );
-      m_console.print( m_language.text_tag_get( "tag_console_dimensions_setup_note" ), 2, 5 );
-      m_console.print( m_language.text_tag_get( "tag_console_dimensions_setup_width" ), 2, 7 );
-      m_console.print( m_language.text_tag_get( "tag_console_dimensions_setup_height" ), 2, 8 );
-      m_console.print( m_language.text_tag_get( "tag_console_dimensions_setup_xoffset" ), 2, 9 );
-      m_console.print( m_language.text_tag_get( "tag_console_dimensions_setup_yoffset" ), 2, 10 );
-      m_console.print( m_language.text_tag_get( "tag_console_dimensions_setup_accept" ), 2, 12 );
-
-      m_console.print( m_language.text_tag_get( "tag_command" ) + ": ", 2, ( console_height - 2 ) );
-      
-      std::string player_input( "" );
-      std::getline( std::cin, player_input );
-      while( !player_input.empty() && player_input[ 0 ] == ' ' ) {
-         player_input.erase( player_input.begin() );
-      }
-      
-      std::string command_string( player_input );
-      int command_value( 0 );
-      int position_of_space_character( player_input.find( ' ' ) );
-      if( position_of_space_character != std::string::npos ) {
-         command_string = player_input.substr( 0, position_of_space_character );
-         
-         std::string value_string = player_input.substr( position_of_space_character + 1, std::string::npos );
-         bool is_value( false );
-         for( int iterator( 0 ); iterator < value_string.size(); ++iterator ) {
-            if( std::isdigit( value_string[ iterator ] ) ) {
-               is_value = true;
-               break;
-            }
-         }
-
-         if( is_value ) {
-            command_value = atoi( value_string.c_str() );
-         }
-      }
-      
-      CommandTag command_tag( m_language.command_tag_get( command_string ) );
-      
-      switch( command_tag ) {
-         case CommandTag::COMMAND_INVALID:
-            break;
-         case CommandTag::COMMAND_HEIGHT:
-            m_console.printable_height_set( command_value );
-            break;
-         case CommandTag::COMMAND_WIDTH:
-            m_console.printable_width_set( command_value );
-            break;
-         case CommandTag::COMMAND_OFFSET_X:
-            m_console.printable_offset_x_set( command_value );
-            break;
-         case CommandTag::COMMAND_OFFSET_Y:
-            m_console.printable_offset_y_set( command_value );
-            break;
-         case CommandTag::COMMAND_ACCEPT:
-            // TODO (WraitheDX): Save print dimensions to config file
-            dimensions_setup_running = false;
-            break;
-      }
-
-      m_console.clear();
-   }
 }
 
 void GameState::run()

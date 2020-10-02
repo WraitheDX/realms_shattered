@@ -30,6 +30,13 @@ public:
    */
    std::string player_string_get();
 
+   /*
+   *  Asks the player to specify x/y offsets and width/height of the console area the game prints to.
+   * 
+   *  Game has a minimum width/height required to ensure proper alignment of things on the screen.
+   */
+   void print_dimensions_setup( Console &console, Language &language );
+
 private:
 
 };

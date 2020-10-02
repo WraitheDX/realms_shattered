@@ -75,13 +75,6 @@ private:
    *  Here the player will explore generated rifts composed of rooms.
    */
    void game_state_rift();
-
-   /*
-   *  Asks the player to specify x/y offsets and width/height of the console area the game prints to.
-   * 
-   *  Game has a minimum width/height required to ensure proper alignment of things on the screen.
-   */
-   void print_dimensions_setup();
 };
 
 #endif // _GAME_STATE_HPP_
