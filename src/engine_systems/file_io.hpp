@@ -2,6 +2,7 @@
 #ifndef _FILE_IO_HPP_
 #define _FILE_IO_HPP_
 
+#include <map>
 #include <string>
 #include <vector>
 
@@ -43,32 +44,39 @@ public:
    static void config_write( const ConfigFile &config_file );
    
    /*
-      Reads a file as a vector of strings, filling the 'file_contents' parameter with the contents of the file.
+   *  Reads a file as a vector of strings, filling the 'file_contents' parameter with the contents of the file.
    */
    static const bool file_read( std::vector <std::string> &file_contents, const std::string &file_name );
 
    /*
-      Writes a single string to the specified file name (obtains working directory internally), and requires truncation flag.
+   *  Writes a single string to the specified file name (obtains working directory internally), and requires truncation flag.
    */
    static const bool file_write( const std::string &file_contents, const std::string &file_name, const bool truncate_file );
 
    /*
-      Writes a vector of strings to the specified file name (obtains working directory internally), and requires truncation flag.
+   *  Reads the file specified and fills parsed_tags with key/value pairs from the file.
+   * 
+   *  Returns success flag.
+   */
+   static const bool file_tags_parse( std::map <std::string, std::string> &parsed_tags, const std::string &file_name );
+
+   /*
+   *  Writes a vector of strings to the specified file name (obtains working directory internally), and requires truncation flag.
    */
    static const bool file_write( const std::vector <std::string> &file_contents, const std::string &file_name, const bool truncate_file );
 
    /* 
-      Read all the files listed in the save directory
+   *  Read all the files listed in the save directory
    */
    static const bool player_files_find( std::vector<std::string> &dir_content );
 
    /*
-      Read all the content of a file in the save directory based on the user choosen file name
+   *  Read all the content of a file in the save directory based on the user choosen file name
    */
    static const bool player_file_load( std::vector <std::string> &file_contents, const std::string &file_name );
 
-    /*
-      Write the player's data in the Save folder 
+   /*
+   *  Write the player's data in the Save folder 
    */
    static const bool player_file_save( GameData &game_data );
 

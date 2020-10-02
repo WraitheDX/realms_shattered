@@ -97,6 +97,32 @@ const bool FileIO::file_read( std::vector <std::string> &file_contents, const st
    return true;
 }
 
+const bool FileIO::file_tags_parse( std::map <std::string, std::string> &parsed_tags, const std::string &file_name )
+{
+   std::vector <std::string> file_contents;
+   if( !file_read( file_contents, file_name ) ) {
+      return false;
+   }
+
+   std::vector <std::string>::iterator file_contents_iterator( file_contents.begin() );
+   std::vector <std::string>::iterator file_contents_end( file_contents.end() );
+   for( ; file_contents_iterator != file_contents_end; ++file_contents_iterator ) {
+      const int tag_separator_position( (*file_contents_iterator).find( ":" ) );
+
+      // If a tag separator (:) cannot be found, skip this line
+      if( tag_separator_position == std::string::npos ) {
+         continue;
+      }
+
+      std::string key_string( (*file_contents_iterator).substr( 0, tag_separator_position ) );
+      std::string value_string( (*file_contents_iterator).substr( tag_separator_position + 1, std::string::npos ) );
+
+      parsed_tags[ key_string ] = value_string;
+   }
+
+   return true;
+}
+
 const bool FileIO::file_write( const std::string &file_contents, const std::string &file_name, const bool truncate_file )
 {
    std::ios_base::openmode file_write_flag;
