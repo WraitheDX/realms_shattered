@@ -5,57 +5,36 @@
 
 #include "../entities/actor.hpp"
 #include "../platform/platform.hpp"
-
-// TODO (WraitheDX): Add generic call to abstracted platform-specific error checking for file_io calls
   
 const ConfigFile FileIO::config_read()
 {
    ConfigFile config_file;
 
-   std::vector <std::string> file_contents;
-   if( !file_read( file_contents, "config.txt" ) ) {
+   std::map <std::string, std::string> file_contents;
+   if( !file_tags_parse( file_contents, "config.txt" ) ) {
       return config_file;
    }
 
-   std::vector <std::string>::iterator file_contents_iterator( file_contents.begin() );
-   const std::vector <std::string>::iterator file_contents_end( file_contents.end() );
+   std::map <std::string, std::string>::iterator file_contents_iterator( file_contents.begin() );
+   std::map <std::string, std::string>::iterator file_contents_end( file_contents.end() );
    for( ; file_contents_iterator != file_contents_end; ++file_contents_iterator ) {
-      if( (*file_contents_iterator).find( "language" ) != std::string::npos ) {
-         const int substring_position( (*file_contents_iterator).find( ":" ) );
-         if( substring_position != std::string::npos ) {
-            config_file.m_language = (*file_contents_iterator).substr( substring_position + 1, std::string::npos );
+      if( file_contents_iterator->first == "language" ) {
+         config_file.m_language = file_contents_iterator->second;
+      } else if( file_contents_iterator->first == "width" ) {
+         if( isdigit( file_contents_iterator->second[ 0 ] ) ) {
+            config_file.m_game_width = atoi( file_contents_iterator->second.c_str() );
          }
-      } else if( (*file_contents_iterator).find( "width" ) != std::string::npos ) {
-         const int substring_position( (*file_contents_iterator).find( ":" ) );
-         if( substring_position != std::string::npos ) {
-            std::string value_string( (*file_contents_iterator).substr( substring_position + 1, std::string::npos ) );
-            if( isdigit( value_string[ 0 ] ) ) {
-               config_file.m_game_width = atoi( (*file_contents_iterator).substr( substring_position + 1, std::string::npos ).c_str() );
-            }
+      } else if( file_contents_iterator->first == "height" ) {
+         if( isdigit( file_contents_iterator->second[ 0 ] ) ) {
+            config_file.m_game_height = atoi( file_contents_iterator->second.c_str() );
          }
-      } else if( (*file_contents_iterator).find( "height" ) != std::string::npos ) {
-         const int substring_position( (*file_contents_iterator).find( ":" ) );
-         if( substring_position != std::string::npos ) {
-            std::string value_string( (*file_contents_iterator).substr( substring_position + 1, std::string::npos ) );
-            if( isdigit( value_string[ 0 ] ) ) {
-               config_file.m_game_height = atoi( (*file_contents_iterator).substr( substring_position + 1, std::string::npos ).c_str() );
-            }
+      } else if( file_contents_iterator->first == "xoffset" ) {
+         if( isdigit( file_contents_iterator->second[ 0 ] ) ) {
+            config_file.m_game_offset_x = atoi( file_contents_iterator->second.c_str() );
          }
-      } else if( (*file_contents_iterator).find( "xoffset" ) != std::string::npos ) {
-         const int substring_position( (*file_contents_iterator).find( ":" ) );
-         if( substring_position != std::string::npos ) {
-            std::string value_string( (*file_contents_iterator).substr( substring_position + 1, std::string::npos ) );
-            if( isdigit( value_string[ 0 ] ) ) {
-               config_file.m_game_offset_x = atoi( (*file_contents_iterator).substr( substring_position + 1, std::string::npos ).c_str() );
-            }
-         }
-      } else if( (*file_contents_iterator).find( "yoffset" ) != std::string::npos ) {
-         const int substring_position( (*file_contents_iterator).find( ":" ) );
-         if( substring_position != std::string::npos ) {
-            std::string value_string( (*file_contents_iterator).substr( substring_position + 1, std::string::npos ) );
-            if( isdigit( value_string[ 0 ] ) ) {
-               config_file.m_game_offset_y = atoi( (*file_contents_iterator).substr( substring_position + 1, std::string::npos ).c_str() );
-            }
+      } else if( file_contents_iterator->first == "yoffset" ) {
+         if( isdigit( file_contents_iterator->second[ 0 ] ) ) {
+            config_file.m_game_offset_y = atoi( file_contents_iterator->second.c_str() );
          }
       }
    }
