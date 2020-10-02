@@ -31,7 +31,7 @@ void GameState::game_state_player_hub()
          FileIO::player_file_save( m_action_log, m_game_data );
          break;
       case CommandTag::COMMAND_HELP:
-         m_user_interface.help_list_display( m_console, m_language );
+         m_game_state_current = GameStateEnum::GAME_STATE_HELP;
          break;
       case CommandTag::COMMAND_QUIT:
          m_game_data.game_terminate();

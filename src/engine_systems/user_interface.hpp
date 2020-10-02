@@ -22,11 +22,6 @@ public:
    void command_prompt_display( Console &console, Language &language );
 
    /*
-   *  Displays the help list that gives the player a list of available game commands.
-   */
-   void help_list_display( Console &console, Language &language );
-
-   /*
    *  Pauses the game and displays the pause message at the bottom of the screen.
    */
    void pause_and_display_message( Console &console );

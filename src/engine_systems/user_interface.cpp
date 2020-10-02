@@ -32,15 +32,6 @@ void UserInterface::command_prompt_display( Console &console, Language &language
    console.print( language.text_tag_get( "tag_command" ) + ": ", 2, COMMAND_TEXT_POSITION_Y + 1 );
 }
 
-void UserInterface::help_list_display( Console &console, Language &language )
-{
-   static const int HELP_TEXT_POSITION_Y = 5;
-
-   console.print( language.text_tag_get( "tag_help_command_list" ), 2, HELP_TEXT_POSITION_Y );
-   console.print( language.text_tag_get( "tag_help_command_list_note" ), 2, HELP_TEXT_POSITION_Y + 1 );
-   console.print( language.text_tag_get( "tag_help_command_list_quit" ), 2, HELP_TEXT_POSITION_Y + 3 );
-}
-
 // TODO (WraitheDX): Need to pause using something like cin, and display a language-specific pause message."
 void UserInterface::pause_and_display_message( Console &console )
 {
