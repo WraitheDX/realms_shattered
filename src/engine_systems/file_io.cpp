@@ -169,7 +169,7 @@ const bool FileIO::player_file_load( std::vector <std::string> &dir_content, con
    return true;
 }
 
-const bool FileIO::player_file_save( GameData &game_data, const std::string &file_name ) {
+const bool FileIO::player_file_save( GameData &game_data ) {
    
    // Check if save folder exists
 
@@ -178,7 +178,7 @@ const bool FileIO::player_file_save( GameData &game_data, const std::string &fil
    file_contents.push_back( "health_current:" + std::to_string( game_data.player_get()-> health_current_get() ) );
    file_contents.push_back( "health_max:" + std::to_string ( game_data.player_get()->health_max_get() ) );
 
-   file_write( file_contents, "save/" + file_name + ".txt", true );
+   file_write( file_contents, "save/" + game_data.player_get()->name_get() + ".txt", true );
 
    return true;
 }
