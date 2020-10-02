@@ -1,5 +1,6 @@
 
 tag_command_accept:accept
+tag_command_attack:attack
 tag_command_back:back
 tag_command_help:help
 tag_command_load:load
