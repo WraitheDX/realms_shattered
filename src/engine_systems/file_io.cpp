@@ -167,3 +167,18 @@ const bool FileIO::player_file_load( std::vector <std::string> &dir_content, con
 
    return true;
 }
+
+const bool FileIO::write_save_file(const std::vector<std::string> & file_contents, const std::string &filename){
+   std::ios_base::openmode file_write_flag = std::ios::trunc;
+   string path = "/save"+choosen_file+".txt";
+   ofstream file(path,file_write_flag);
+
+   const int FILE_CONTENTS_SIZE( file_contents.size() );
+   for( int file_contents_iterator( 0 ); file_contents_iterator < FILE_CONTENTS_SIZE; ++file_contents_iterator ) {
+      file << file_contents[ file_contents_iterator ] + "\n";
+   }
+
+   file.close();
+
+   return true;
+}

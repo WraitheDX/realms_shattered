@@ -5,6 +5,10 @@
 #include <random>
 #include <time.h>
 
+#include <dirent.h>
+#include <sys/stat.h>
+#include <string.h>
+
 #include "../engine_systems/file_io.hpp"
 #include "../engine_systems/logger.hpp"
 #include "../entities/actor.hpp"
@@ -174,3 +178,27 @@ void GameState::run()
       }
    }
 }
+
+void GameState::game_state_save(){
+    GameData m_game_data;
+    vector <string> saved_files;
+
+    bool exist_save_dir =  FileIO::save_files_find(saved_files);
+    if (exist_save_dir == NULL)
+        mkdir("/save",0777);
+    
+    string char_name = "Character name = "+ m_game_datap.player_get()->name_get();
+    string  current_health ="Character current health  = " + std::to_string(m_game_data.player_get()-> health_current_get() );
+    int  max_health = "Character max health  = " + std::to_string (m_game_data.player_get()->health_max_get());
+
+    std::vector<std::string> file_contents;
+    file_contents.push_back(char_name);
+    file_contents.push_back(current_health);
+    file_contents.push_back(max_health);
+
+    FileIO::write_save_file(&file_content, &char_name);
+        
+
+}
+
+
