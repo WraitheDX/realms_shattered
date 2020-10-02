@@ -102,3 +102,86 @@ std::string UserInput::player_string_get()
 
    return player_string;
 }
+  
+void UserInput::print_dimensions_setup( Console &console, Language &language )
+{
+   const std::string SETUP_TITLE( language.text_tag_get( "tag_console_dimensions_setup_title" ) );
+
+   const int INSTRUCTIONS_POSITION_Y( 6 );
+
+   bool dimensions_setup_running( true );
+   while( dimensions_setup_running ) {
+      int console_buffer_width( 0 );
+      int console_buffer_height( 0 );
+      console.buffer_dimensions_get( console_buffer_width, console_buffer_height );
+
+      int console_width = console.width_get();
+      int console_height = console.height_get();
+      console.print_box( 0, 0, console_width, console_height, '+' );
+      console.print_box( 0, 0, console_width, 5, '+' );
+      console.print_box( 0, console_height - 3, console_width, 3, '+' );
+
+      console.print( SETUP_TITLE, ( ( console_width / 2 ) - ( SETUP_TITLE.length() / 2 ) ), 2 );
+      console.print( language.text_tag_get( "tag_console_dimensions_setup_instructions" ), 2, INSTRUCTIONS_POSITION_Y );
+      console.print( language.text_tag_get( "tag_console_dimensions_setup_note" ), 2, INSTRUCTIONS_POSITION_Y + 1 );
+
+      console.print( language.text_tag_get( "tag_console_dimensions_setup_width" ), 2, INSTRUCTIONS_POSITION_Y + 3 );
+      console.print( language.text_tag_get( "tag_console_dimensions_setup_height" ), 2, INSTRUCTIONS_POSITION_Y + 4 );
+      console.print( language.text_tag_get( "tag_console_dimensions_setup_xoffset" ), 2, INSTRUCTIONS_POSITION_Y + 5 );
+      console.print( language.text_tag_get( "tag_console_dimensions_setup_yoffset" ), 2, INSTRUCTIONS_POSITION_Y + 6 );
+
+      console.print( language.text_tag_get( "tag_console_dimensions_setup_accept" ), 2, INSTRUCTIONS_POSITION_Y + 8 );
+
+      console.print( language.text_tag_get( "tag_command" ) + ": ", 2, ( console_height - 2 ) );
+      
+      std::string player_input( "" );
+      std::getline( std::cin, player_input );
+      while( !player_input.empty() && player_input[ 0 ] == ' ' ) {
+         player_input.erase( player_input.begin() );
+      }
+      
+      std::string command_string( player_input );
+      int command_value( 0 );
+      int position_of_space_character( player_input.find( ' ' ) );
+      if( position_of_space_character != std::string::npos ) {
+         command_string = player_input.substr( 0, position_of_space_character );
+         
+         std::string value_string = player_input.substr( position_of_space_character + 1, std::string::npos );
+         bool is_value( false );
+         for( int iterator( 0 ); iterator < value_string.size(); ++iterator ) {
+            if( std::isdigit( value_string[ iterator ] ) ) {
+               is_value = true;
+               break;
+            }
+         }
+
+         if( is_value ) {
+            command_value = atoi( value_string.c_str() );
+         }
+      }
+      
+      CommandTag command_tag( language.command_tag_get( command_string ) );
+      
+      switch( command_tag ) {
+         case CommandTag::COMMAND_INVALID:
+            break;
+         case CommandTag::COMMAND_HEIGHT:
+            console.printable_height_set( command_value );
+            break;
+         case CommandTag::COMMAND_WIDTH:
+            console.printable_width_set( command_value );
+            break;
+         case CommandTag::COMMAND_OFFSET_X:
+            console.printable_offset_x_set( command_value );
+            break;
+         case CommandTag::COMMAND_OFFSET_Y:
+            console.printable_offset_y_set( command_value );
+            break;
+         case CommandTag::COMMAND_ACCEPT:
+            dimensions_setup_running = false;
+            break;
+      }
+
+      console.clear();
+   }
+}
