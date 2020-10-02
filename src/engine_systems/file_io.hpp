@@ -64,6 +64,11 @@ public:
       Read all the content of a file in the save directory based on the user choosen file name
    */
    static const bool player_file_load( std::vector <std::string> &file_contents, const std::string &file_name );
+    /*
+      Write the player's data in the Save folder 
+   */
+   static const bool write_save_file(const std::vector<std::strinf> &file_contents, const std::string &filename);
+
 };
 
 #endif // _FILE_IO_HPP_
