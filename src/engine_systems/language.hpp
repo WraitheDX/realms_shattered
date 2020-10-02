@@ -50,11 +50,6 @@ public:
    const std::string text_tag_get( const std::string &text_tag );
 
 private:
-   /*
-      Returns true and fills key/value with a tag and related value.
-   */
-   const bool key_value_pair_get( const std::string &line, std::string &key, std::string &value );
-
    std::map <std::string, CommandTag> commands_map;
    std::map <std::string, std::string> text_map;
 };
