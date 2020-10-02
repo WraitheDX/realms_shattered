@@ -73,9 +73,6 @@ void GameState::game_state_rift()
             }
          }
          break;
-      case CommandTag::COMMAND_HELP:
-         m_user_interface.help_list_display( m_console, m_language );
-         break;
       case CommandTag::COMMAND_QUIT:
          m_game_data.game_terminate();
          break;
