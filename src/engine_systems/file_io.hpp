@@ -70,7 +70,7 @@ public:
     /*
       Write the player's data in the Save folder 
    */
-   static const bool player_file_save( GameData &game_data, const std::string &file_name );
+   static const bool player_file_save( GameData &game_data );
 
 };
 
