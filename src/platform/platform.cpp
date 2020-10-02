@@ -93,3 +93,19 @@ const bool get_file_list( std::vector <std::string> &file_list, const std::strin
 
    return false;
 }
+
+void folder_create_platform( const std::string &folder_path )
+{
+   #ifdef _WIN32
+      folder_create_win32( folder_path );
+   #endif // _WIN32
+}
+
+const bool folder_exists_check( const std::string &folder_path )
+{
+   #ifdef _WIN32
+      return folder_exists_check_win32( folder_path );
+   #endif // _WIN32
+
+   return false;
+}

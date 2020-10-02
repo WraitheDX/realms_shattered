@@ -39,6 +39,8 @@ const bool Language::commands_load( const std::string &file_name )
          commands_map[ command_map_iter->second ] = CommandTag::COMMAND_QUIT;
       } else if( command_map_iter->first == "tag_command_rift" ) {
          commands_map[ command_map_iter->second ] = CommandTag::COMMAND_RIFT;
+      } else if( command_map_iter->first == "tag_command_save" ) {
+         commands_map[ command_map_iter->second ] = CommandTag::COMMAND_SAVE;
       } else if( command_map_iter->first == "tag_command_height" ) {
          commands_map[ command_map_iter->second ] = CommandTag::COMMAND_HEIGHT;
       } else if( command_map_iter->first == "tag_command_width" ) {

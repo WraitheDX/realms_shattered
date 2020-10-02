@@ -6,25 +6,9 @@
 #include <string>
 #include <vector>
 
+#include "action_log.hpp"
+#include "config_file.hpp"
 #include "game_data.hpp"
-
-struct ConfigFile {
-   ConfigFile():
-      m_language( "INVALID" ),
-      m_game_width( 0 ),
-      m_game_height( 0 ),
-      m_game_offset_x( 0 ),
-      m_game_offset_y( 0 )
-   {
-   
-   }
-   std::string m_language;
-
-   int m_game_width;
-   int m_game_height;
-   int m_game_offset_x;
-   int m_game_offset_y;
-};
 
 /*
    Class container for static file reading and writing functions.
@@ -65,6 +49,20 @@ public:
    */
    static const bool file_write( const std::vector <std::string> &file_contents, const std::string &file_name, const bool truncate_file );
 
+   /*
+   *  Creates specified folder.
+   * 
+   *  Appends folder name to current working directory.
+   */
+   static void folder_create( const std::string &folder_name );
+
+   /*
+   *  Returns true if folder_name exists.
+   * 
+   *  Appends folder name to current working directory.
+   */
+   static const bool folder_exists( const std::string &folder_name );
+
    /* 
    *  Read all the files listed in the save directory
    */
@@ -73,12 +71,12 @@ public:
    /*
    *  Read all the content of a file in the save directory based on the user choosen file name
    */
-   static const bool player_file_load( std::vector <std::string> &file_contents, const std::string &file_name );
+   static const bool player_file_load( GameData &game_data, const std::string &file_name );
 
    /*
    *  Write the player's data in the Save folder 
    */
-   static const bool player_file_save( GameData &game_data );
+   static const bool player_file_save( ActionLog &action_log, GameData &game_data );
 
 };
 
