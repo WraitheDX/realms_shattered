@@ -19,6 +19,60 @@ const CommandTag UserInput::player_command_get( Language &language )
    return command_tag;
 }
 
+std::vector <std::string> UserInput::player_input_break( std::string &player_input )
+{
+   std::vector <std::string> player_input_broken;
+   while( !player_input.empty() ) {
+      int space_position( player_input.find( " " ) );
+      if( space_position == std::string::npos ) {
+         player_input_broken.push_back( player_input );
+         player_input.clear();
+      } else {
+         player_input_broken.push_back( player_input.substr( 0, space_position ) );
+         player_input.erase( 0, space_position + 1 );
+      }
+   }
+
+   return player_input_broken;
+}
+
+const bool UserInput::player_input_is_number( int &player_number, std::string &player_input )
+{
+   for( int iterator( 0 ); iterator < player_input.size(); ++iterator ) {
+      if( !isdigit( player_input[ iterator ] ) ) {
+         return false;
+      }
+   }
+
+   player_number = atoi( player_input.c_str() );
+   return true;
+}
+
+std::string UserInput::player_input_process( std::vector <CommandTag> &command_tags, Language &language )
+{
+   std::string user_input( "" );
+   // Getline allows us to read the entirety of the player's input, including spaces.
+   std::getline( std::cin, user_input );
+   Logger( LoggerLevel::LOG_LEVEL_INFO ).log() << "Player typed: " << user_input;
+
+   std::vector <std::string> user_input_broken( player_input_break( user_input ) );
+   std::string input_remainder( "" );
+   for( int iterator( 0 ); iterator < user_input_broken.size(); ++iterator ) {
+      CommandTag command_tag_found = language.command_tag_get( user_input_broken[ iterator ] );
+      if( command_tag_found == CommandTag::COMMAND_INVALID ) {
+         if( !input_remainder.empty() ) {
+            input_remainder.append( " " );
+         }
+
+         input_remainder.append( user_input_broken[ iterator ] );
+      } else {
+         command_tags.push_back( command_tag_found );
+      }
+   }
+
+   return input_remainder;
+}
+
 void UserInput::player_name_get( Console &console, GameData &game_data, Language &language )
 {
    Logger( LoggerLevel::LOG_LEVEL_PROGRESS ).log() << "Asking player for name";
