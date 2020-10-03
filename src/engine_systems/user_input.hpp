@@ -16,6 +16,18 @@ public:
    const CommandTag player_command_get( Language &language );
 
    /*
+   *  If player_input is an integer, fills player_number with integer stored, and returns true.
+   */
+   const bool player_input_is_number( int &player_number, std::string &player_input );
+
+   /*
+   *  Retrieves player input and fills commands_tags with all command tags found in string.
+   * 
+   *  Return value is the remainder of the string that did not hold valid commands tags.
+   */
+   std::string player_input_process( std::vector <CommandTag> &command_tags, Language &language );
+
+   /*
    *  Asks the player to enter the language they prefer to play the game with, and returns the 2-character string of the language (Ex: en).
    */
    std::string player_language_get( Console &console, Language &language );
@@ -38,7 +50,10 @@ public:
    void print_dimensions_setup( Console &console, Language &language );
 
 private:
-
+   /*
+   *  Breaks player input string into a vector of separate strings.
+   */
+   std::vector <std::string> player_input_break( std::string &player_input );
 };
 
 #endif _USER_INPUT_HPP_
