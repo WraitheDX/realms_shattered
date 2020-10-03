@@ -1,6 +1,10 @@
 
 tag_command:Command
 
+tag_settings_display:display - change the dimensions and offsets of the game window
+tag_settings_language:language - change the language the game displays
+tag_settings_title:Settings Menu
+
 tag_console_dimensions_setup_title:Game Screen Setup
 tag_console_dimensions_setup_instructions:Please use the following commands to set the printable area of the game...
 tag_console_dimensions_setup_note:(NOTE: You may change these values later in the game file: config.txt)
@@ -18,4 +22,5 @@ tag_help_command_list_back:back - return from the current menu
 tag_help_command_list_move:move - move to the next room
 tag_help_command_list_quit:quit - quit the game
 tag_help_command_list_rift:rift - enter a randomized rift
+tag_help_command_list_settings:settings - provides options to change language and position game window
 tag_name_entry:Who's story is this?

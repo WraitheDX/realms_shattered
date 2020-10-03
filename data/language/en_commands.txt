@@ -2,12 +2,15 @@
 tag_command_accept:accept
 tag_command_attack:attack
 tag_command_back:back
+tag_command_display:display
 tag_command_help:help
+tag_command_language:language
 tag_command_load:load
 tag_command_move:move
 tag_command_quit:quit
 tag_command_rift:rift
 tag_command_save:save
+tag_command_settings:settings
 
 tag_command_height:height
 tag_command_width:width

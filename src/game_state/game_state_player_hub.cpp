@@ -30,6 +30,9 @@ void GameState::game_state_player_hub()
       case CommandTag::COMMAND_SAVE:
          FileIO::player_file_save( m_action_log, m_game_data );
          break;
+      case CommandTag::COMMAND_SETTINGS:
+         m_user_input.settings_menu( m_console, m_language );
+         break;
       case CommandTag::COMMAND_HELP:
          m_game_state_current = GameStateEnum::GAME_STATE_HELP;
          break;

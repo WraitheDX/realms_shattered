@@ -29,8 +29,12 @@ const bool Language::commands_load( const std::string &file_name )
          commands_map[ command_map_iter->second ] = CommandTag::COMMAND_ATTACK;
       } else if( command_map_iter->first == "tag_command_back" ) {
          commands_map[ command_map_iter->second ] = CommandTag::COMMAND_BACK;
+      } else if( command_map_iter->first == "tag_command_display" ) {
+         commands_map[ command_map_iter->second ] = CommandTag::COMMAND_DISPLAY;
       } else if( command_map_iter->first == "tag_command_help" ) {
          commands_map[ command_map_iter->second ] = CommandTag::COMMAND_HELP;
+      } else if( command_map_iter->first == "tag_command_language" ) {
+         commands_map[ command_map_iter->second ] = CommandTag::COMMAND_LANGUAGE;
       } else if( command_map_iter->first == "tag_command_load" ) {
          commands_map[ command_map_iter->second ] = CommandTag::COMMAND_LOAD;
       } else if( command_map_iter->first == "tag_command_move" ) {
@@ -41,6 +45,8 @@ const bool Language::commands_load( const std::string &file_name )
          commands_map[ command_map_iter->second ] = CommandTag::COMMAND_RIFT;
       } else if( command_map_iter->first == "tag_command_save" ) {
          commands_map[ command_map_iter->second ] = CommandTag::COMMAND_SAVE;
+      } else if( command_map_iter->first == "tag_command_settings" ) {
+         commands_map[ command_map_iter->second ] = CommandTag::COMMAND_SETTINGS;
       } else if( command_map_iter->first == "tag_command_height" ) {
          commands_map[ command_map_iter->second ] = CommandTag::COMMAND_HEIGHT;
       } else if( command_map_iter->first == "tag_command_width" ) {
