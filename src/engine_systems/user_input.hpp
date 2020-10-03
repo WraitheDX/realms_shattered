@@ -49,6 +49,11 @@ public:
    */
    void print_dimensions_setup( Console &console, Language &language );
 
+   /*
+   *  Shows the player a settings menu where they can access language selection and dimensions setup.
+   */
+   void settings_menu( Console &console, Language &language );
+
 private:
    /*
    *  Breaks player input string into a vector of separate strings.

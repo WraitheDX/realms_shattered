@@ -19,8 +19,9 @@ void GameState::game_state_help()
    m_console.print( m_language.text_tag_get( "tag_help_command_list_move" ), 2, HELP_TEXT_POSITION_Y + 3 );
    m_console.print( m_language.text_tag_get( "tag_help_command_list_attack" ), 2, HELP_TEXT_POSITION_Y + 4 );
    m_console.print( m_language.text_tag_get( "tag_help_command_list_rift" ), 2, HELP_TEXT_POSITION_Y + 5 );
-   m_console.print( m_language.text_tag_get( "tag_help_command_list_back" ), 2, HELP_TEXT_POSITION_Y + 6 );
-   m_console.print( m_language.text_tag_get( "tag_help_command_list_quit" ), 2, HELP_TEXT_POSITION_Y + 7 );
+   m_console.print( m_language.text_tag_get( "tag_help_command_list_settings" ), 2, HELP_TEXT_POSITION_Y + 6 );
+   m_console.print( m_language.text_tag_get( "tag_help_command_list_back" ), 2, HELP_TEXT_POSITION_Y + 7 );
+   m_console.print( m_language.text_tag_get( "tag_help_command_list_quit" ), 2, HELP_TEXT_POSITION_Y + 8 );
 
    m_console.print( "Command: ", 2, m_console.height_get() - 2 );
    CommandTag command_tag( m_user_input.player_command_get( m_language ) );

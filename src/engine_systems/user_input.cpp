@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 
+#include "config_file.hpp"
+#include "file_io.hpp"
 #include "logger.hpp"
 #include "../entities/actor.hpp"
 
@@ -233,6 +235,61 @@ void UserInput::print_dimensions_setup( Console &console, Language &language )
             break;
          case CommandTag::COMMAND_ACCEPT:
             dimensions_setup_running = false;
+            break;
+      }
+
+      console.clear();
+   }
+}
+
+void UserInput::settings_menu( Console &console, Language &language )
+{
+   console.clear();
+
+   const std::string TITLE_STRING( language.text_tag_get( "tag_settings_title" ) );
+   const int INSTRUCTIONS_POSITION_Y( 6 );
+   ConfigFile config_file( FileIO::config_read() );
+
+   bool settings_menu_running( true );
+   while( settings_menu_running ) {
+      int console_buffer_width( 0 );
+      int console_buffer_height( 0 );
+      console.buffer_dimensions_get( console_buffer_width, console_buffer_height );
+
+      int console_width = console.width_get();
+      int console_height = console.height_get();
+      console.print_box( 0, 0, console_width, console_height, '+' );
+      console.print_box( 0, 0, console_width, 5, '+' );
+      console.print_box( 0, console_height - 3, console_width, 3, '+' );
+
+      console.print( TITLE_STRING, ( ( console_width / 2 ) - ( TITLE_STRING.length() / 2 ) ), 2 );
+      console.print( language.text_tag_get( "tag_settings_display" ), 2, INSTRUCTIONS_POSITION_Y );
+      console.print( language.text_tag_get( "tag_settings_language" ), 2, INSTRUCTIONS_POSITION_Y + 1 );
+
+      console.print( language.text_tag_get( "tag_command" ) + ": ", 2, ( console_height - 2 ) );
+      CommandTag command_tag( player_command_get( language ) );
+      
+      switch( command_tag ) {
+         case CommandTag::COMMAND_INVALID:
+            break;
+         case CommandTag::COMMAND_DISPLAY:
+            console.clear();
+            UserInput::print_dimensions_setup( console, language );
+      
+            config_file.m_game_height = console.height_get();
+            config_file.m_game_width = console.width_get();
+            config_file.m_game_offset_x = console.m_print_offset_x;
+            config_file.m_game_offset_y = console.m_print_offset_y;
+            
+            FileIO::config_write( config_file );
+            break;
+         case CommandTag::COMMAND_LANGUAGE:
+            console.clear();
+            config_file.m_language = UserInput::player_language_get( console, language );
+            FileIO::config_write( config_file );
+            break;
+         case CommandTag::COMMAND_BACK:
+            settings_menu_running = false;
             break;
       }
 
