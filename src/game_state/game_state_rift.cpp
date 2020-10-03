@@ -19,9 +19,13 @@ void GameState::game_state_rift()
    m_console.print( NAME_RIFT_STATE, ( ( m_console.width_get() / 2 ) - ( NAME_RIFT_STATE.length() / 2 ) ), 1 );
    m_console.print( name_room, ( ( m_console.width_get() / 2 ) - ( name_room.length() / 2 ) ), 2 );
    
+   static bool monster_seen_message_displayed( false );
    if( rift != nullptr &&
        !rift->m_rooms[ rift->m_room_current ].m_entity_list.empty() ) {
-      m_action_log.add_line( "You see " + rift->m_rooms[ rift->m_room_current ].m_entity_list[ 0 ]->name_get() + " before you." );
+      if( !monster_seen_message_displayed ) {
+         m_action_log.add_line( "You see " + rift->m_rooms[ rift->m_room_current ].m_entity_list[ 0 ]->name_get() + " before you." );
+         monster_seen_message_displayed = true;
+      }
    }
 
    m_user_interface.player_stats_brief_display( m_console, m_language, m_game_data );
@@ -44,6 +48,7 @@ void GameState::game_state_rift()
                   m_action_log.add_line( m_game_data.player_get()->name_get() + " has defeated " + enemy->name_get() );
                   m_game_data.entity_destroy( enemy->unique_id_get() );
                   rift->m_rooms[ rift->m_room_current ].m_entity_list.erase( rift->m_rooms[ rift->m_room_current ].m_entity_list.begin() );
+                  monster_seen_message_displayed = false;
                }
                
                player_turn_taken = true;

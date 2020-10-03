@@ -20,6 +20,11 @@ public:
    Actor *actor_create( const std::string name, const int health, const int damage );
 
    /*
+   *  Create a new Actor from the file specified with a unique_id and add them to the entity list.
+   */
+   Actor *actor_create_from_file( const std::string &file_path );
+
+   /*
    *  Finds actor by their unique_id value and populates *actor if found.
    * 
    *  Returns false if unique_id was not found, or if the unique_id found is not of type Actor.

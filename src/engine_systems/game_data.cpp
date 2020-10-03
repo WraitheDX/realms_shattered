@@ -3,6 +3,7 @@
 
 #include <random>
 
+#include "../engine_systems/file_io.hpp"
 #include "../engine_systems/logger.hpp"
 #include "../entities/actor.hpp"
 #include "../entities/entity.hpp"
@@ -29,6 +30,41 @@ GameData::~GameData()
 
 Actor *GameData::actor_create( const std::string name, const int health, const int damage )
 {
+   const int unique_id( unique_id_create() );
+   Actor *actor( new Actor( this, unique_id, name, health, damage ) );
+
+   m_entity_list.push_back( actor );
+
+   Logger( LoggerLevel::LOG_LEVEL_INFO ).log() << "Actor created - Name: " << name << ", ID: " << actor->unique_id_get();
+   return actor;
+}
+
+Actor *GameData::actor_create_from_file( const std::string &file_name )
+{
+   Logger( LoggerLevel::LOG_LEVEL_INFO ).log() << "Creating actor from file: " << file_name;
+
+   std::map <std::string, std::string> file_contents;
+   if( !FileIO::file_tags_parse( file_contents, file_name ) ) {
+      Logger( LoggerLevel::LOG_LEVEL_ERROR ).log() << "GameData::actor_create_from_file() failed to parse file: " << file_name;
+      return nullptr;
+   }
+
+   std::string name( "Actor" );
+   int health( 1 );
+   int damage( 1 );
+
+   std::map <std::string, std::string>::iterator file_contents_iterator( file_contents.begin() );
+   std::map <std::string, std::string>::iterator file_contents_end( file_contents.end() );
+   for( ; file_contents_iterator != file_contents_end; ++file_contents_iterator ) {
+      if( file_contents_iterator->first == "name" ) {
+         name = file_contents_iterator->second;
+      } else if( file_contents_iterator->first == "health" ) {
+         health = atoi( file_contents_iterator->second.c_str() );
+      } else if( file_contents_iterator->first == "damage" ) {
+         damage = atoi( file_contents_iterator->second.c_str() );
+      }
+   }
+
    const int unique_id( unique_id_create() );
    Actor *actor( new Actor( this, unique_id, name, health, damage ) );
 
@@ -128,7 +164,7 @@ void GameData::rift_create()
       int spawn_enemy_roll( rand() % 100 + 1 );
       if( spawn_enemy_roll < ( m_rift->m_difficulty * 20 ) ) {
          Logger( LoggerLevel::LOG_LEVEL_INFO ).log() << m_rift->m_rooms.back().m_name << " spawned an enemy";
-         Actor *enemy( actor_create( "Enemy", 5, 2 ) );
+         Actor *enemy( actor_create_from_file( "data/entities/actors/goblin.txt" ) );
          m_rift->m_rooms.back().m_entity_list.push_back( enemy );
       }
    }
