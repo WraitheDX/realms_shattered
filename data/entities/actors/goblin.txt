@@ -1,0 +1,4 @@
+
+name:Goblin
+health:5
+damage:2
